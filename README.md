@@ -27,8 +27,8 @@ This project focuses on building a complete SystemVerilog verification environme
 | --------- | ---------- | ---------- |
 | Raghad Murad Mahfouth Bouzia | 1212214 | 2 |
 | Ahlam Hilmy Mustafa Abuqare | 1191612 | 1 |
-| Qossay Mohammed Ahmed Abusondos | | 1 |
-| Anwar Ghassan Ibraheem Atawna | | 2 |
+| Qossay Mohammed Ahmed Abusondos |1221082 | 1 |
+| Anwar Ghassan Ibraheem Atawna |1222275 | 2 |
 
 ---
 
