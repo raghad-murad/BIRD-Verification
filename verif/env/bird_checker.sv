@@ -197,5 +197,3 @@ class bird_checker extends uvm_component;
 endclass : bird_checker
 
 `endif // BIRD_CHECKER_SV
-
-          

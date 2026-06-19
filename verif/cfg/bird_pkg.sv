@@ -1,6 +1,4 @@
-// ============================================================================
-// bird_pkg.sv - Package with all TB includes in dependency order
-// ============================================================================
+// Package with all TB includes in dependency order
 `ifndef BIRD_PKG_SV
 `define BIRD_PKG_SV
 
@@ -12,7 +10,7 @@ package bird_pkg;
     // Sequence item
     `include "verif/seq/bird_transaction.sv"
 
-    // Sequencer + base sequence (bird_base_seq.sv defines bird_sequencer class)
+    // Sequences
     `include "verif/seq/bird_base_seq.sv"
     `include "verif/seq/local_seq.sv"
     `include "verif/seq/remote_seq.sv"
@@ -23,7 +21,7 @@ package bird_pkg;
     `include "verif/seq/reset_seq.sv"
     `include "verif/seq/interleaved_seq.sv"
 
-    // Environment components
+    // Environment
     `include "verif/env/bird_monitor.sv"
     `include "verif/env/bird_scoreboard.sv"
     `include "verif/env/bird_coverage.sv"

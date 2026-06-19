@@ -1,33 +1,31 @@
-// ============================================================
-// bird_transaction — UVM sequence item
+
+// bird_transaction (UVM sequence item)
 // Represents one BIRD fragment (one cfg word + payload bytes)
-// ============================================================
 class bird_transaction extends uvm_sequence_item;
     `uvm_object_utils(bird_transaction)
 
-    // ---- cfg field breakdown --------------------------------
-    rand bit         traffic_type;   // cfg[0]   0=local, 1=remote
-    rand bit [7:0]   payload_len;    // cfg[15:8] 1-255
-    rand bit [4:0]   frag_num;       // cfg[20:16] 1-31
-    rand bit [4:0]   seq_num;        // cfg[28:24] 1-31
+    // cfg field breakdown
+    rand bit         traffic_type;                      // cfg[0] have two values: 0 = local traffic, 1 = remote traffic
+    rand bit [7:0]   payload_len;                       // cfg[15:8] has values in rang: 1-255
+    rand bit [4:0]   frag_num;                          // cfg[20:16] has values in rang: 1-31
+    rand bit [4:0]   seq_num;                           // cfg[28:24] has values in rang: 1-31
 
-    // Reserved bits — kept as rand so error injection is easy
-    rand bit [6:0]   rsvd_7_1;      // cfg[7:1]
-    rand bit [2:0]   rsvd_23_21;    // cfg[23:21]
-    rand bit [2:0]   rsvd_31_29;    // cfg[31:29]
+    // Reserved bits always zero
+    rand bit [6:0]   rsvd_7_1;                          // cfg[7:1]
+    rand bit [2:0]   rsvd_23_21;                        // cfg[23:21]
+    rand bit [2:0]   rsvd_31_29;                        // cfg[31:29]
 
-    // ---- Payload & CRC --------------------------------------
-    rand byte unsigned payload[];    // randomised payload bytes
-    bit  [15:0]        crc16;        // computed after randomisation
+    // Payload & CRC
+    rand byte unsigned payload[];                       // randomised payload bytes
+    bit [15:0] crc16;                                   // computed after randomisation
 
-    // ---- Valid-packet constraints ---------------------------
+     // Constraints
     constraint c_valid_traffic_type {
         soft traffic_type inside {0, 1};
     }
 
     constraint c_valid_payload_len {
-        // payload_len = total bytes on wire (data + 2 CRC bytes); minimum 4
-        // so the DUT's payload_left==3 CRC-transition fires at least once.
+        // payload_len = total bytes on wire (data + 2 CRC bytes)
         payload_len inside {[4:255]};
     }
 
@@ -46,8 +44,6 @@ class bird_transaction extends uvm_sequence_item;
     }
 
     constraint c_payload_size {
-        // payload carries data bytes only; DUT RX_CRC consumes the 2 CRC bytes
-        // separately, so the on-wire stream is payload.size()+2 == payload_len.
         payload.size() == payload_len - 2;
     }
 
@@ -59,12 +55,12 @@ class bird_transaction extends uvm_sequence_item;
         }
     }
 
-    // ---- post_randomize: compute CRC ------------------------
+    // post randomization
     function void post_randomize();
         crc16 = calc_crc16(payload);
     endfunction
 
-    // ---- CRC-16/CCITT-FALSE (poly 0x1021, init 0xFFFF) -----
+    // CRC-16/CCITT-FALSE (poly 0x1021, init 0xFFFF) -----
     static function bit [15:0] calc_crc16(byte unsigned data[]);
         bit [15:0] crc = 16'hFFFF;
         foreach (data[i]) begin
@@ -84,7 +80,7 @@ class bird_transaction extends uvm_sequence_item;
         return crc;
     endfunction
 
-    // ---- Assemble cfg word ----------------------------------
+    // Assemble cfg word
     function logic [31:0] get_cfg();
         logic [31:0] c;
         c[0]     = traffic_type;
@@ -97,23 +93,27 @@ class bird_transaction extends uvm_sequence_item;
         return c;
     endfunction
 
-    // ---- UVM standard overrides -----------------------------
+    // UVM standard overrides
     function new(string name = "bird_transaction");
         super.new(name);
     endfunction
 
     function void do_copy(uvm_object rhs);
         bird_transaction rhs_;
+
         if (!$cast(rhs_, rhs))
             `uvm_fatal(get_type_name(), "do_copy: type mismatch")
+
         super.do_copy(rhs);
         traffic_type = rhs_.traffic_type;
         payload_len  = rhs_.payload_len;
         frag_num     = rhs_.frag_num;
         seq_num      = rhs_.seq_num;
+
         rsvd_7_1     = rhs_.rsvd_7_1;
         rsvd_23_21   = rhs_.rsvd_23_21;
         rsvd_31_29   = rhs_.rsvd_31_29;
+
         payload      = new[rhs_.payload.size()](rhs_.payload);
         crc16        = rhs_.crc16;
     endfunction
@@ -121,14 +121,19 @@ class bird_transaction extends uvm_sequence_item;
     function bit do_compare(uvm_object rhs, uvm_comparer comparer);
         bird_transaction rhs_;
         bit eq;
+
         if (!$cast(rhs_, rhs)) return 0;
+
         eq = super.do_compare(rhs, comparer);
+
         eq &= (traffic_type === rhs_.traffic_type);
         eq &= (payload_len  === rhs_.payload_len);
         eq &= (frag_num     === rhs_.frag_num);
         eq &= (seq_num      === rhs_.seq_num);
         eq &= (crc16        === rhs_.crc16);
+
         if (payload.size() != rhs_.payload.size()) return 0;
+
         foreach (payload[i])
             eq &= (payload[i] === rhs_.payload[i]);
         return eq;
@@ -136,17 +141,20 @@ class bird_transaction extends uvm_sequence_item;
 
     function string convert2string();
         string s;
+
         s = $sformatf(
             "bird_transaction: type=%0s len=%0d frag=%0d seq=%0d crc=0x%04h rsvd[7:1]=%0h rsvd[23:21]=%0h rsvd[31:29]=%0h",
             (traffic_type ? "REMOTE" : "LOCAL"),
             payload_len, frag_num, seq_num, crc16,
             rsvd_7_1, rsvd_23_21, rsvd_31_29);
+
         if (payload.size() > 0) begin
             s = {s, " payload[0]="};
             s = {s, $sformatf("0x%02h", payload[0])};
             if (payload.size() > 1)
                 s = {s, $sformatf("...[last]=0x%02h", payload[payload.size()-1])};
         end
+        
         return s;
     endfunction
 

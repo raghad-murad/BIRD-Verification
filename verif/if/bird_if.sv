@@ -1,9 +1,11 @@
-// ============================================================
-// BIRD Interface — clocking blocks for driver and monitors
-// ============================================================
+// BIRD interface
+// Contains DUT signals, clocking blocks, and modports
+
 interface bird_if (input logic clk);
 
-    // ---- DUT signals ----------------------------------------
+    // DUT signals
+
+    // Reset
     logic        rst_n;
 
     // Input channel
@@ -25,9 +27,9 @@ interface bird_if (input logic clk);
     // Status
     logic [15:0] drop_cnt;
 
-    // ---- Driver clocking block ------------------------------
-    // Inputs to DUT driven at negedge (setup before posedge sample)
-    // DUT outputs (in_rdy, local_vld, …) sampled at posedge
+    // Driver clocking block
+
+    // Drives inputs and samples outputs at posedge clk
     clocking driver_cb @(posedge clk);
         default input  #1step;
         default output #1ns;
@@ -48,8 +50,9 @@ interface bird_if (input logic clk);
         input  drop_cnt;
     endclocking : driver_cb
 
-    // ---- Monitor clocking block -----------------------------
-    // All signals sampled at posedge — pure observation
+    // Monitor clocking block
+
+    // Pure observation of DUT signals
     clocking monitor_cb @(posedge clk);
         default input #1step;
 
@@ -69,15 +72,13 @@ interface bird_if (input logic clk);
         input drop_cnt;
     endclocking : monitor_cb
 
-    // ---- Modports -------------------------------------------
+    // Modports
     modport driver_mp  (clocking driver_cb,  input clk, input rst_n);
     modport monitor_mp (clocking monitor_cb, input clk, input rst_n);
 
-    // ---- Reset control ----------------------------------------
-    // Testbench-side reusable reset primitive. Used once by tb_top for the
-    // power-on reset, and reusable by any test/sequence that needs to drive
-    // a mid-run reset pulse (e.g. TP_RST_02/03 and future reset-related
-    // tests such as TP_CNT_06) via the vif_plain handle in bird_base_test.
+    // Reset task
+
+    // Applies reset for a configurable number of cycles
     task automatic apply_reset(int unsigned hold_cycles = 4);
         rst_n = 1'b0;
         repeat (hold_cycles) @(negedge clk);
