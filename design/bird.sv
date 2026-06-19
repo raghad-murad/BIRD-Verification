@@ -1,34 +1,14 @@
 // ============================================================
-// BIRD Behavioral SystemVerilog Model (NON-synthesizable)
+// Birzeit University
+// Faculty of Engineering and Technology
+// Department of Electrical and Computer Engineering
+// Second Semester 2025/2026
+// Course: Chip Design Verification (ENCS5337)
+// Instructor : Elias Khalil
 // ============================================================
-// UPDATED rule (per your latest instruction):
-//  - For LOCAL traffic (cfg[0]==0):
-//      If SEQ_NUM != 1 OR FRAG_NUM != 1  => DROP packet (no output), increment drop_cnt
-//      So: valid local requires SEQ_NUM==1 AND FRAG_NUM==1.
-//  - For REMOTE traffic (cfg[0]==1):
-//      SEQ_NUM must be non-zero and FRAG_NUM must be non-zero.
-//
-// Other key points:
-//  - cfg is SIDE-BAND (NOT part of stream)
-//  - cfg sampled on SAME cycle as FIRST payload byte of each fragment (RX_IDLE)
-//  - Each fragment: PAYLOAD_LEN bytes then 2 CRC bytes
-//  - Local (when valid): forward payload bytes and forward the 2 CRC bytes unchanged on local stream
-//  - Remote: one packet at a time (by SEQ_NUM), fragments by FRAG_NUM; N inferred as max FRAG_NUM seen
-//           output packed 32-bit words + CRC word {16'h0000, crc16}
-//  - drop_cnt: 16-bit wrap-around counter, increments ONCE per dropped packet
-//
-// cfg format (32-bit):
-//  [0]      TRAFFIC_TYPE (0=local, 1=remote)
-//  [7:1]    reserved (must be 0)
-//  [15:8]   PAYLOAD_LEN (1..255)
-//  [20:16]  FRAG_NUM
-//  [23:21]  reserved (must be 0)
-//  [28:24]  SEQ_NUM
-//  [31:29]  reserved (must be 0)
-//
-// Notes:
-//  - Behavioral: in_rdy always 1 (no input backpressure modeling).
-//  - Input CRC is NOT checked.
+// Course project: Birzeit Integrated Router Design (BIRD)
+// BIRD Behavioral SystemVerilog Model (NON-synthesizable)
+// Design is build as behavioral model just for DV purposes 
 // ============================================================
 
 module bird (
