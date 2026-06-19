@@ -3,7 +3,7 @@
 
 interface bird_if (input logic clk);
 
-    // DUT signals
+    //  DUT signals
 
     // Reset
     logic        rst_n;

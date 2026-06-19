@@ -21,7 +21,7 @@ package bird_pkg;
     `include "verif/seq/reset_seq.sv"
     `include "verif/seq/interleaved_seq.sv"
 
-    // Environment
+    //  Environment
     `include "verif/env/bird_monitor.sv"
     `include "verif/env/bird_scoreboard.sv"
     `include "verif/env/bird_coverage.sv"

@@ -1,7 +1,6 @@
 // Sequencer and base sequence
 
 // sequencer
-
 class bird_sequencer extends uvm_sequencer #(bird_transaction);
     `uvm_component_utils(bird_sequencer)
 
@@ -12,7 +11,6 @@ class bird_sequencer extends uvm_sequencer #(bird_transaction);
 endclass : bird_sequencer
 
 // Base sequence provides common randomisation helpers
-
 class bird_base_seq extends uvm_sequence #(bird_transaction);
     `uvm_object_utils(bird_base_seq)
 

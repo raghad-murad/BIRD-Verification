@@ -24,8 +24,8 @@ class bird_transaction extends uvm_sequence_item;
         soft traffic_type inside {0, 1};
     }
 
+    // payload_len = total bytes on wire (data + 2 CRC bytes)
     constraint c_valid_payload_len {
-        // payload_len = total bytes on wire (data + 2 CRC bytes)
         payload_len inside {[4:255]};
     }
 
