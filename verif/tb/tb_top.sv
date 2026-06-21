@@ -1,28 +1,19 @@
-// ============================================================================
-// tb_top.sv - Top-Level Testbench Module
-// ============================================================================
 `timescale 1ns/1ps
-
 module tb_top;
+
     import uvm_pkg::*;
     `include "uvm_macros.svh"
     import bird_pkg::*;
 
-    // -------------------------------------------------------------------------
-    // Clock generation - 10 ns period (100 MHz)
-    // -------------------------------------------------------------------------
+    // Clock generation (100 MHz clock)
     logic clk;
     initial clk = 1'b0;
     always #5 clk = ~clk;
 
-    // -------------------------------------------------------------------------
     // Interface instantiation
-    // -------------------------------------------------------------------------
     bird_if dut_if (.clk(clk));
 
-    // -------------------------------------------------------------------------
     // DUT instantiation - connect to interface signals
-    // -------------------------------------------------------------------------
     bird dut (
         .clk         (clk),
         .rst_n       (dut_if.rst_n),
@@ -39,11 +30,7 @@ module tb_top;
         .drop_cnt    (dut_if.drop_cnt)
     );
 
-    // -------------------------------------------------------------------------
     // Reset generation
-    //   - rst_n asserted (low) for first 20 ns
-    //   - then deasserted (high)
-    // -------------------------------------------------------------------------
     initial begin
         dut_if.in_vld     = 1'b0;
         dut_if.data_in    = 8'h00;
@@ -51,22 +38,15 @@ module tb_top;
         dut_if.local_rdy  = 1'b1;
         dut_if.remote_rdy = 1'b1;
 
-        // Power-on reset, held for 4 clock cycles. Uses the same reusable
-        // apply_reset() task that test-side mid-run resets call (see
-        // bird_if.sv), so there is exactly one reset-driving code path.
+        // Reuse shared reset task
         dut_if.apply_reset(4);
         `uvm_info("tb_top", "Reset deasserted", UVM_LOW)
     end
 
-    // -------------------------------------------------------------------------
-    // UVM interface registration in config_db
-    // -------------------------------------------------------------------------
+    // Register interfaces
     initial begin
-        // NOTE: the glob "uvm_test_top.*" only matches components BELOW
-        // uvm_test_top (it requires a literal '.' after the name), not
-        // uvm_test_top itself. Using "uvm_test_top*" (no dot) matches both
-        // the test component itself and everything under it, since
-        // bird_base_test now also looks up vif_plain directly.
+
+        // Use "uvm_test_top*" to match both test and descendants
 
         // Register driver_mp modport for driver
         uvm_config_db #(virtual bird_if.driver_mp)::set(
@@ -76,28 +56,21 @@ module tb_top;
         uvm_config_db #(virtual bird_if.monitor_mp)::set(
             null, "uvm_test_top*", "vif", dut_if.monitor_mp);
 
-        // Register plain interface - used by the scoreboard's final
-        // drop_cnt snapshot, and by bird_base_test (so any test, including
-        // the TP_RST_* reset tests, can drive/observe rst_n directly)
+        // Plain interface for reset and final checks
         uvm_config_db #(virtual bird_if)::set(
             null, "uvm_test_top*", "vif_plain", dut_if);
 
-        // Start UVM test (test name passed via +UVM_TESTNAME=<test>)
+        // Launch selected test
         run_test();
     end
 
-    // -------------------------------------------------------------------------
-    // Simulation timeout watchdog - abort after 10 ms simulated time
-    // (raised from 1ms to accommodate the 65537-packet drop_cnt_wraparound_test)
-    // -------------------------------------------------------------------------
+    // 10 ms timeout for long-running tests
     initial begin
         #10_000_000;
         `uvm_fatal("tb_top", "Simulation timeout - possible hang detected")
     end
 
-    // -------------------------------------------------------------------------
-    // Optional waveform dump
-    // -------------------------------------------------------------------------
+    // Wave dump
     initial begin
         if ($test$plusargs("WAVES")) begin
             $dumpfile("bird_tb.vcd");
