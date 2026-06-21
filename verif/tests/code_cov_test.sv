@@ -1,7 +1,6 @@
 `ifndef CODE_COV_TEST_SV
 `define CODE_COV_TEST_SV
 
-
 class drop_while_active_test extends bird_base_test;
     `uvm_component_utils(drop_while_active_test)
     function new(string name = "drop_while_active_test", uvm_component parent = null);
@@ -18,4 +17,4 @@ class drop_while_active_test extends bird_base_test;
     endtask
 endclass : drop_while_active_test
 
-`endif // CODE_COV_TEST_SV
+`endif

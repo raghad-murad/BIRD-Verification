@@ -1,9 +1,7 @@
 `ifndef SAMPLING_TEST_SV
 `define SAMPLING_TEST_SV
 
-// TP_SMPL_02: verify that cfg is sampled only on the first byte
-// of a fragment and any later cfg changes are ignored.
-
+// TP_SMPL_02 (spec Sec.2.3): cfg is sampled only on the first payload byte; drives vif directly to glitch cfg after byte 0 and relies on the scoreboard's byte-for-byte check against the original cfg
 class cfg_change_ignored_test extends bird_base_test;
     `uvm_component_utils(cfg_change_ignored_test)
 
@@ -22,11 +20,10 @@ class cfg_change_ignored_test extends bird_base_test;
 
         phase.raise_objection(this);
 
-// Wait for reset deassertion before starting the test.
-
+        // Wait for reset deassertion first, else the drive loop below starts mid-stream/mid-glitch
         @(posedge vif.clk iff vif.rst_n === 1'b1);
 
-        // Generate a valid payload and CRC.
+        // Build a normal, fully valid local payload + CRC.
         payload = new[payload_len - 2];
         foreach (payload[i]) payload[i] = $urandom_range(0, 255);
         crc = bird_transaction::calc_crc16(payload);
@@ -36,15 +33,14 @@ class cfg_change_ignored_test extends bird_base_test;
         stream[payload.size()]   = crc[15:8];
         stream[payload.size()+1] = crc[7:0];
 
-        // Original valid configuration.
+        // Original cfg: valid LOCAL, SEQ_NUM=1, FRAG_NUM=1, this payload_len.
         orig_cfg          = 32'h0;
         orig_cfg[0]       = 1'b0;
         orig_cfg[15:8]    = 8'(payload_len);
         orig_cfg[20:16]   = 5'd1;
         orig_cfg[28:24]   = 5'd1;
 
-       // Modified cfg applied after the first byte to test cfg sampling behavior.
-       
+        // Glitch cfg: PAYLOAD_LEN forced to 0; must be ignored once the fragment is underway (spec)
         glitch_cfg        = orig_cfg;
         glitch_cfg[15:8]  = 8'd0;
 
@@ -92,4 +88,4 @@ class cfg_change_ignored_test extends bird_base_test;
     endtask
 endclass : cfg_change_ignored_test
 
-`endif // SAMPLING_TEST_SV
+`endif
