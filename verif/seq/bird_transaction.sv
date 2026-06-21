@@ -1,6 +1,11 @@
+// ============================================================
+// bird_transaction — UVM sequence item
+// Represents one BIRD fragment (one cfg word + payload bytes)
+// ============================================================
 class bird_transaction extends uvm_sequence_item;
     `uvm_object_utils(bird_transaction)
 
+    // ---- cfg field breakdown --------------------------------
     rand bit         traffic_type;   // cfg[0]   0=local, 1=remote
     rand bit [7:0]   payload_len;    // cfg[15:8] 1-255
     rand bit [4:0]   frag_num;       // cfg[20:16] 1-31
@@ -11,15 +16,18 @@ class bird_transaction extends uvm_sequence_item;
     rand bit [2:0]   rsvd_23_21;    // cfg[23:21]
     rand bit [2:0]   rsvd_31_29;    // cfg[31:29]
 
+    // ---- Payload & CRC --------------------------------------
     rand byte unsigned payload[];    // randomised payload bytes
     bit  [15:0]        crc16;        // computed after randomisation
 
+    // ---- Valid-packet constraints ---------------------------
     constraint c_valid_traffic_type {
         soft traffic_type inside {0, 1};
     }
 
     constraint c_valid_payload_len {
-        // min 4 so the DUT's payload_left==3 CRC-transition fires at least once
+        // payload_len = total bytes on wire (data + 2 CRC bytes); minimum 4
+        // so the DUT's payload_left==3 CRC-transition fires at least once.
         payload_len inside {[4:255]};
     }
 
@@ -38,7 +46,8 @@ class bird_transaction extends uvm_sequence_item;
     }
 
     constraint c_payload_size {
-        // payload excludes the 2 CRC bytes consumed separately by DUT RX_CRC
+        // payload carries data bytes only; DUT RX_CRC consumes the 2 CRC bytes
+        // separately, so the on-wire stream is payload.size()+2 == payload_len.
         payload.size() == payload_len - 2;
     }
 
@@ -50,11 +59,12 @@ class bird_transaction extends uvm_sequence_item;
         }
     }
 
+    // ---- post_randomize: compute CRC ------------------------
     function void post_randomize();
         crc16 = calc_crc16(payload);
     endfunction
 
-    // CRC-16/CCITT-FALSE (poly 0x1021, init 0xFFFF)
+    // ---- CRC-16/CCITT-FALSE (poly 0x1021, init 0xFFFF) -----
     static function bit [15:0] calc_crc16(byte unsigned data[]);
         bit [15:0] crc = 16'hFFFF;
         foreach (data[i]) begin
@@ -74,6 +84,7 @@ class bird_transaction extends uvm_sequence_item;
         return crc;
     endfunction
 
+    // ---- Assemble cfg word ----------------------------------
     function logic [31:0] get_cfg();
         logic [31:0] c;
         c[0]     = traffic_type;
@@ -86,6 +97,7 @@ class bird_transaction extends uvm_sequence_item;
         return c;
     endfunction
 
+    // ---- UVM standard overrides -----------------------------
     function new(string name = "bird_transaction");
         super.new(name);
     endfunction

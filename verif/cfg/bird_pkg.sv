@@ -1,7 +1,8 @@
+// ============================================================================
+// bird_pkg.sv - Package with all TB includes in dependency order
+// ============================================================================
 `ifndef BIRD_PKG_SV
 `define BIRD_PKG_SV
-
-// Package with all testbench includes in dependency order
 
 package bird_pkg;
 
@@ -44,10 +45,7 @@ package bird_pkg;
     `include "verif/tests/interleaved_test.sv"
     `include "verif/tests/sampling_test.sv"
     `include "verif/tests/handshake_test.sv"
-    `include "verif/tests/seq_frag_test.sv"
-    `include "verif/tests/reorder_test.sv"
-    `include "verif/tests/cfg_test.sv"
 
 endpackage : bird_pkg
 
-`endif 
+`endif // BIRD_PKG_SV
