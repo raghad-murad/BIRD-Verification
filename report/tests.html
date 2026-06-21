@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="<username>"> <meta name="GENERATOR" content="urg/version [en] (platform name) [urg]">
+<title>Unified Coverage Report :: Module :: bird</title>
+<link type="text/css" rel="stylesheet" href="css/.urg.css">
+<link type="text/css" rel="stylesheet" href="css/.layout.css">
+<link type="text/css" rel="stylesheet" href="css/.breadcrumb.css">
+<script type="text/javascript" src="js/.jquery.js"></script>
+<script type="text/javascript" src="js/.jquery-ui.js"></script>
+<script type="text/javascript" src="js/.sortable.js"></script>
+<script type="text/javascript" src="js/.layout.js"></script>
+<script type="text/javascript" src="js/.breadcrumb.js"></script>
+<script type="text/javascript">
+var layout, westLayout, centerLayout;
+$(document).ready(function () {
+  if ($("#north-bread-crumb")) {
+    $("#north-bread-crumb").jBreadCrumb({easing:'swing'})
+  }
+  layout = $("body").layout({ 
+    resizable: true,
+    spacing_open: 4,
+    spacing_closed: 4,
+    north: {
+      size: 76
+    },
+    south: {
+      size: 45,
+      initClosed: true
+    },
+    west: {
+      size: 500,
+      resizable: true,
+      initClosed: false
+    }
+  });
+  centerLayout = $('div.ui-layout-center').layout({
+    north__paneSelector: ".ui-layout-center-inner-north",
+    center__paneSelector: ".ui-layout-center-inner-center", 
+    north__size: 50,
+    spacing_open: 4,
+    spacing_closed: 4
+  });
+});
+</script>
+</head>
+<body onLoad="initPage();"><div class="ui-layout-north">
+<div class="logo"></div>
+<center class="pagetitle">Module Definition</center>
+<div align="center"><a href="dashboard.html" ><b>dashboard</b></a> | <a href="hierarchy.html" ><b>hierarchy</b></a> | <a href="modlist.html" ><b>modlist</b></a> | groups | <a href="tests.html" ><b>tests</b></a> | asserts</div>
+
+</div>
+<div class="ui-layout-west">
+<div name='tag_bird'>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module : <a href="#"  onclick="showContent('tag_bird')">bird</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td></tr><tr>
+<td class="s8 cl rt"> 88.83</td>
+<td class="s9 cl rt"><a href="mod2.html#Line" > 91.06</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Cond" > 80.49</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Toggle" > 88.53</a></td>
+<td class="s10 cl rt"><a href="mod2.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Branch" > 84.09</a></td>
+</tr></table><br clear=all>
+<span class=repname>Source File(s) : </span>
+<br clear=all>
+<a href="javascript:void(0);"  onclick="openSrcFile('/home/st53/BIRD_1212214/design/bird.sv')">/home/st53/BIRD_1212214/design/bird.sv</a><br clear=all>
+<br clear=all>
+<span class=repname>Module self-instances :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td></tr><tr>
+<td class="wht cl wordwrap"><a href="mod2.html#inst_tag_2"  onclick="showContent('inst_tag_2')">tb_top.dut</a></td>
+<td class="s8 cl rt"> 88.83</td>
+<td class="s9 cl rt"><a href="mod2.html#Line" > 91.06</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Cond" > 80.49</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Toggle" > 88.53</a></td>
+<td class="s10 cl rt"><a href="mod2.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Branch" > 84.09</a></td>
+</tr></table></div>
+</div>
+<br clear=all>
+<div name='tag_bird'>
+<hr>
+<a name="inst_tag_2"></a>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module Instance : <a href="hierarchy.html#tag_urg_inst_2" >tb_top.dut</a></span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Instance :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td></tr><tr>
+<td class="s8 cl rt"> 88.83</td>
+<td class="s9 cl rt"><a href="mod2.html#Line" > 91.06</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Cond" > 80.49</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Toggle" > 88.53</a></td>
+<td class="s10 cl rt"><a href="mod2.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod2.html#Branch" > 84.09</a></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Instance's subtree :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td></tr><tr>
+<td class="s8 cl rt"> 88.83</td>
+<td class="s9 cl rt"> 91.06</td>
+<td class="s8 cl rt"> 80.49</td>
+<td class="s8 cl rt"> 88.53</td>
+<td class="s10 cl rt">100.00</td>
+<td class="s8 cl rt"> 84.09</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Parent : </span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td class="alfsrt">NAME</td></tr><tr>
+<td class="s7 cl rt"> 70.20</td>
+<td class="s7 cl rt"> 77.27</td>
+<td class="wht cl rt"></td>
+<td class="s10 cl rt">100.00</td>
+<td class="wht cl rt"></td>
+<td class="s3 cl rt"> 33.33</td>
+<td><a href="mod4.html#inst_tag_4" >tb_top</a></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Subtrees :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td></tr><tr>
+<td colspan=7>no children</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<hr>
+Since this is the module's only instance, the coverage report is the same as for the module.</div>
+<div class="ui-layout-center">
+<div class="ui-layout-center-inner-center">
+<div name='tag_bird'>
+<a name="Line"></a>
+Line Coverage for Module : <a href="mod2.html" >bird</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="4" width="82">
+<tr><th></th><th>Line No.</th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s9"><td class="lf">TOTAL</td><td></td><td>179</td><td>163</td><td>91.06</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>47</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s9"><td class="lf">ROUTINE</td><td>55</td><td>19</td><td>18</td><td>94.74</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>83</td><td>8</td><td>8</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>99</td><td>8</td><td>8</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>117</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>128</td><td>13</td><td>13</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>159</td><td>6</td><td>6</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>170</td><td>3</td><td>3</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>178</td><td>6</td><td>6</td><td>100.00</td></tr>
+<tr class="s8"><td class="lf">ROUTINE</td><td>191</td><td>11</td><td>9</td><td>81.82</td></tr>
+<tr class="s8"><td class="lf">ALWAYS</td><td>238</td><td>103</td><td>90</td><td>87.38</td></tr>
+</table>
+<pre class="code"><br clear=all>
+46                        task automatic inc_drop_cnt();
+47         1/1              drop_cnt &lt;= drop_cnt + 16'd1;
+48                        endtask
+49                      
+50                        // ----------------------------
+51                        // cfg validity (per latest rules)
+52                        // ----------------------------
+53                        function automatic bit cfg_invalid(input logic [31:0] c);
+54                          bit inv;
+55         1/1              inv = 0;
+56                      
+57                          // Reserved bits must be 0
+58         2/2              if (c[7:1]   != 7'd0) inv = 1;
+                        MISSING_ELSE
+59         2/2              if (c[23:21] != 3'd0) inv = 1;
+                        MISSING_ELSE
+60         2/2              if (c[31:29] != 3'd0) inv = 1;
+                        MISSING_ELSE
+61                      
+62                          // PAYLOAD_LEN must be 1..255 (0 invalid)
+63         2/2              if (c[15:8] == 8'd0) inv = 1;
+                        MISSING_ELSE
+64                      
+65         1/1              if (c[0] == 1'b0) begin
+66                            // LOCAL: must be SEQ_NUM==1 and FRAG_NUM==1
+67         <font color = "red">1/2     ==>        if (c[28:24] != 5'd1) inv = 1;</font>
+                        MISSING_ELSE
+68         2/2                if (c[20:16] != 5'd1) inv = 1;
+                        MISSING_ELSE
+69                          end else begin
+70                            // REMOTE: SEQ_NUM and FRAG_NUM must be non-zero
+71         2/2                if (c[28:24] == 5'd0) inv = 1;
+                        MISSING_ELSE
+72         2/2                if (c[20:16] == 5'd0) inv = 1;
+                        MISSING_ELSE
+73                          end
+74                      
+75         1/1              return inv;
+76                        endfunction
+77                      
+78                        // ----------------------------
+79                        // CRC16-CCITT (poly 0x1021, init 0xFFFF) over byte queue
+80                        // ----------------------------
+81                        function automatic logic [15:0] crc16_ccitt_bytes(input u8_t bytes[$]);
+82                          logic [15:0] crc;
+83         1/1              crc = 16'hFFFF;
+84         1/1              foreach (bytes[i]) begin
+85         1/1                crc ^= {bytes[i], 8'h00};
+86         1/1                for (int b = 0; b &lt; 8; b++) begin
+87         2/2                  if (crc[15]) crc = (crc &lt;&lt; 1) ^ 16'h1021;
+88         1/1                  else         crc = (crc &lt;&lt; 1);
+89                            end
+90                          end
+91         1/1              return crc;
+92                        endfunction
+93                      
+94                        // ----------------------------
+95                        // Pack bytes into 32-bit words (little-endian within word)
+96                        // ----------------------------
+97                        function automatic void pack_bytes_to_words(input u8_t bytes[$], inout logic [31:0] wq[$]);
+98                          int i;
+99         1/1              i = 0;
+100        1/1              while (i &lt; bytes.size()) begin
+101                           logic [31:0] w;
+102        1/1                w = 32'h0;
+103        1/1                for (int k = 0; k &lt; 4; k++) begin
+104        1/1                  if (i &lt; bytes.size()) begin
+105        1/1                    w[8*k +: 8] = bytes[i];
+106        1/1                    i++;
+107                             end
+                        MISSING_ELSE
+108                           end
+109        1/1                wq.push_back(w);
+110                         end
+111                        endfunction
+112                     
+113                       // ----------------------------
+114                       // Input ready (behavioral model is always ready)
+115                       // ----------------------------
+116                       always_comb begin
+117        1/1              in_rdy = 1'b1;
+118                       end
+119                     
+120                       // ----------------------------
+121                       // Output queues (hold stable under backpressure by not popping)
+122                       // ----------------------------
+123                       u8_t         local_q[$];
+124                       logic [31:0] remote_wq[$];
+125                     
+126                       // Drive outputs + pop on handshake
+127                       always_ff @(posedge clk or negedge rst_n) begin
+128        1/1              if (!rst_n) begin
+129        1/1                local_vld  &lt;= 1'b0;
+130        1/1                data_local &lt;= 8'h00;
+131                     
+132        1/1                remote_vld  &lt;= 1'b0;
+133        1/1                data_remote &lt;= 32'h0;
+134                         end else begin
+135        1/1                local_vld  = (local_q.size() != 0);
+136        1/1                data_local = (local_q.size() != 0) ? local_q[0] : 8'h00;
+137        1/1                if (local_vld &amp;&amp; local_rdy) begin
+138        1/1                  void'(local_q.pop_front());
+139                           end
+                        MISSING_ELSE
+140                     
+141        1/1                remote_vld  &lt;= (remote_wq.size() != 0);
+142        1/1                data_remote &lt;= (remote_wq.size() != 0) ? remote_wq[0] : 32'h0;
+143        1/1                if (remote_vld &amp;&amp; remote_rdy) begin
+144        1/1                  void'(remote_wq.pop_front());
+145                           end
+                        MISSING_ELSE
+146                         end
+147                       end
+148                     
+149                       // ============================================================
+150                       // Remote accumulation state (one packet at a time)
+151                       // ============================================================
+152                       bit          remote_active;
+153                       int unsigned active_seq;                 // 1..31 (packet identifier)
+154                       int unsigned active_max_frag;            // inferred N: max FRAG_NUM seen so far (1..31)
+155                       bit          frag_seen   [1:31];
+156                       u8_t         frag_payload[1:31][$];
+157                     
+158                       task automatic clear_remote_state();
+159        1/1              remote_active    = 0;
+160        1/1              active_seq       = 0;
+161        1/1              active_max_frag  = 0;
+162        1/1              for (int f = 1; f &lt;= 31; f++) begin
+163        1/1                frag_seen[f] = 0;
+164        1/1                frag_payload[f].delete();
+165                         end
+166                       endtask
+167                     
+168                       task automatic drop_remote_packet_counted();
+169                         // Drop currently-accumulated remote packet (if any) and count it as one dropped packet.
+170        1/1              if (remote_active) begin
+171        1/1                inc_drop_cnt();
+172                         end
+                   <font color = "red">==>  MISSING_ELSE</font>
+173        1/1              clear_remote_state();
+174                       endtask
+175                     
+176                       function automatic bit all_frags_ready(input int unsigned n);
+177                         bit ok;
+178        1/1              ok = 1;
+179        1/1              for (int f = 1; f &lt;= 31; f++) begin
+180        1/1                if (f &lt;= n) begin
+181        2/2                  if (!frag_seen[f]) ok = 0;
+                        MISSING_ELSE
+182                           end
+                        MISSING_ELSE
+183                         end
+184        1/1              return ok;
+185                       endfunction
+186                     
+187                       task automatic build_and_queue_remote_output();
+188                         u8_t merged[$];
+189                         logic [15:0] crc;
+190                     
+191        1/1              merged.delete();
+192                     
+193                         // Merge in order 1..N; if missing any =&gt; drop packet
+194        1/1              for (int f = 1; f &lt;= active_max_frag; f++) begin
+195        1/1                if (!frag_seen[f]) begin
+196        <font color = "red">0/1     ==>          drop_remote_packet_counted();</font>
+197        <font color = "red">0/1     ==>          return;</font>
+198                           end
+                        MISSING_ELSE
+199        2/2                foreach (frag_payload[f][i]) merged.push_back(frag_payload[f][i]);
+200                         end
+201                     
+202                         // Regenerate CRC over merged payload (cfg is not part of stream)
+203        1/1              crc = crc16_ccitt_bytes(merged);
+204                     
+205                         // Queue merged payload packed into 32-bit words, then CRC word
+206        1/1              pack_bytes_to_words(merged, remote_wq);
+207        1/1              remote_wq.push_back({16'h0000, crc});
+208                     
+209                         // Clear current remote packet state after queuing output (NOT a drop)
+210        1/1              clear_remote_state();
+211                       endtask
+212                     
+213                         // ============================================================
+214                         // RX fragment FSM
+215                         // ============================================================
+216                         typedef enum logic [1:0] {RX_IDLE, RX_PAYLOAD, RX_CRC} rx_state_e;
+217                         rx_state_e rx_st;
+218                     
+219                         // Latched at start-of-fragment (first payload byte)
+220                         bit          rx_is_remote;
+221                         bit          rx_drop;
+222                     
+223                         int unsigned rx_seq;       // SEQ_NUM (packet id) [28:24]
+224                         int unsigned rx_len;       // PAYLOAD_LEN [15:8]
+225                         int unsigned rx_frag;      // FRAG_NUM [20:16]
+226                     
+227                         // Counters for the remainder of the fragment AFTER consuming the first payload byte
+228                         int unsigned payload_left;  // remaining payload bytes after first byte
+229                         int unsigned crc_left;      // remaining CRC bytes (2)
+230                     
+231                         // Temporary capture for current remote fragment payload
+232                         u8_t cur_frag_payload[$];
+233                     
+234                         // ============================================================
+235                         // Main sequential behavior
+236                         // ============================================================
+237                         always_ff @(posedge clk or negedge rst_n) begin
+238        1/1                  if (!rst_n) begin
+239        1/1                      $display(&quot;ssssssssssssssssss state moved to idle&quot;);
+240        1/1                      rx_st &lt;= RX_IDLE;
+241                     
+242        1/1                      local_q.delete();
+243        1/1                      remote_wq.delete();
+244        1/1                      cur_frag_payload.delete();
+245                     
+246        1/1                      drop_cnt &lt;= 16'd0;
+247                     
+248        1/1                      clear_remote_state();
+249                     
+250                             end else begin
+251        1/1                  if (in_vld &amp;&amp; in_rdy) begin
+252        1/1                      unique case (rx_st)
+253                     
+254                                     // ----------------------------------------------------
+255                                     // RX_IDLE: first payload byte of a fragment arrives here
+256                                     // cfg sampled in SAME cycle as first payload byte.
+257                                     // ----------------------------------------------------
+258                                     RX_IDLE: begin
+259        1/1                              rx_drop      = cfg_invalid(cfg);
+260        1/1                              rx_is_remote = cfg[0];
+261        1/1                              rx_len       = cfg[15:8];
+262        1/1                              rx_frag      = cfg[20:16];
+263        1/1                              rx_seq       = cfg[28:24];
+264                     
+265        1/1                              $display(&quot;==================== Delete cur_frag_payload =========== idle state now&quot;);
+266        1/1                              cur_frag_payload.delete();
+267                     
+268                                         // Consuming FIRST payload byte now; remaining payload bytes = PAYLOAD_LEN - 1
+269        1/1                              payload_left = (cfg[15:8] &gt; 0) ? (cfg[15:8] - 1) : 0;
+270        1/1                              crc_left     = 2;
+271                     
+272                                         // If cfg invalid: count one dropped packet; consume bytes but do not forward/store
+273        1/1                              if (rx_drop) begin
+274        1/1                                  inc_drop_cnt();
+275        1/1                                  $display(&quot;rx_drop ..........................&quot;);
+276                     
+277                                             // If this is a remote fragment for the active packet, drop that active packet too
+278        1/1                                  if (cfg[0] == 1'b1 &amp;&amp; remote_active &amp;&amp; (cfg[28:24] == active_seq)) begin
+279        1/1                                      drop_remote_packet_counted();
+280                                             end  
+                        MISSING_ELSE
+281                                         end else begin
+282                                             // Valid cfg: handle local vs remote
+283        1/1                                  if (!rx_is_remote) begin
+284                                                 // LOCAL valid (SEQ_NUM==1 and FRAG_NUM==1): forward first payload byte
+285        1/1                                      $display(&quot;push new local pkt first byte %0h&quot;,data_in );
+286        1/1                                      local_q.push_back(data_in);
+287                                             end else begin
+288                                                 // REMOTE valid
+289        1/1                                      if (!remote_active) begin
+290                                                     // Start a new remote packet only when FRAG_NUM==1
+291                                                     // if (rx_frag == 1) begi
+292        1/1                                        if (rx_seq &lt;= rx_frag) begin
+293        1/1                                              remote_active   = 1;
+294        1/1                                              active_seq      = rx_seq;
+295        1/1                                              active_max_frag = 0;
+296        1/1                                              for (int f = 1; f &lt;= 31; f++) begin
+297        1/1                                                  frag_seen[f] = 0;
+298        1/1                                                  frag_payload[f].delete();
+299                                                         end
+300        1/1                                              $display(&quot;====================0 Adding data %0h&quot;,data_in);
+301        1/1                                              cur_frag_payload.push_back(data_in);
+302                                                     end else begin
+303                                                         // Remote fragment without active packet start =&gt; drop packet
+304        1/1                                              inc_drop_cnt();
+305                                                     end
+306                                                 end else begin
+307                                                     // Active packet exists
+308        1/1                                          $display(&quot;rx seq %0d, active seq %0d&quot;, rx_seq, active_seq);
+309                                                     //if (rx_seq != active_seq) begin
+310        1/1                                          if (rx_seq &gt; rx_frag) begin
+311                                                         // Mismatched SEQ while accumulating =&gt; drop current packet
+312        1/1                                              drop_remote_packet_counted();
+313                     
+314                                                         // Start new only if incoming fragment is FRAG_NUM==1
+315                                                         //if (rx_frag == 1) begin
+316        1/1                                              if (rx_seq == 1) begin
+317        <font color = "red">0/1     ==>                                          remote_active   = 1;</font>
+318        <font color = "red">0/1     ==>                                          active_seq      = rx_seq;</font>
+319        <font color = "red">0/1     ==>                                          active_max_frag = 0;</font>
+320        <font color = "red">0/1     ==>                                          for (int f = 1; f &lt;= 31; f++) begin</font>
+321        <font color = "red">0/1     ==>                                              frag_seen[f] = 0;</font>
+322        <font color = "red">0/1     ==>                                              frag_payload[f].delete();</font>
+323                                                             end
+324        <font color = "red">0/1     ==>                                          $display(&quot;====================1 Adding data %0h&quot;,data_in);</font>
+325        <font color = "red">0/1     ==>                                          cur_frag_payload.push_back(data_in);</font>
+326                                                         end else begin
+327                                                             // Otherwise drop incoming packet too
+328        1/1                                                  inc_drop_cnt();
+329                                                         end
+330                                                     end else begin
+331                                                         // Same SEQ as active: accept payload
+332        1/1                                              $display(&quot;====================2 Adding data %0h&quot;,data_in);
+333        1/1                                              cur_frag_payload.push_back(data_in);
+334                                                     end
+335                                                 end
+336                                             end
+337                                         end
+338                     
+339                                         // Next state
+340        1/1                              if (((cfg[15:8] &gt; 0) ? (cfg[15:8] - 1) : 0) == 0) begin
+341        1/1                                  $display(&quot;ssssssssssssssssss state moved to crc&quot;);
+342        1/1                                  rx_st &lt;= RX_CRC;
+343                                         end else begin
+344        1/1                                  $display(&quot;ssssssssssssssssss state moved to payload&quot;);
+345        1/1                                  rx_st &lt;= RX_PAYLOAD;
+346                                         end
+347                                     
+348                                     end
+349                     
+350                                     // ----------------------------------------------------
+351                                     // RX_PAYLOAD: remaining payload bytes
+352                                     // ----------------------------------------------------
+353                                     RX_PAYLOAD: begin
+354        1/1                              rx_drop      = cfg_invalid(cfg);
+355        1/1                            if ( (!rx_is_remote &amp;&amp; remote_active) ||  (rx_is_remote &amp;&amp; !remote_active) ) begin
+356        1/1                                   rx_drop =1;
+357        1/1                              $display(&quot;Dropppppppppppppppppppppppppppp&quot;);
+358                                       end
+                        MISSING_ELSE
+359        1/1                              if (!rx_drop) begin
+360        1/1                                  if (!rx_is_remote) begin
+361                                                 // Local: forward payload bytes
+362        1/1                                      $display(&quot;push payload byte %0h&quot;,data_in );
+363        1/1                                      local_q.push_back(data_in);
+364                                             end else begin
+365                                                 // Remote: only keep collecting if active context matches rx_seq
+366        1/1                                      if (remote_active &amp;&amp; (rx_seq &lt;= rx_frag)) begin
+367        1/1                                          $display(&quot;%t ====================3 Adding data %0h&quot;,$time,data_in);
+368        1/1                                          cur_frag_payload.push_back(data_in);
+369                                                 end
+                   <font color = "red">==>  MISSING_ELSE</font>
+370                                             end
+371                                         end
+                        MISSING_ELSE
+372                     
+373        2/2                              if (payload_left &gt; 0) payload_left &lt;= payload_left - 1;
+                        MISSING_ELSE
+374                     
+375                                         // After consuming the last remaining payload byte, move to CRC
+376        1/1                              if (payload_left == 3) begin
+377                                             //$display(&quot;ssssssssssssssssss state moved to crc&quot;);
+378        1/1                                  rx_st &lt;= RX_CRC;
+379                                         end
+                        MISSING_ELSE
+380                                         
+381                                     end
+382                     
+383                                     // ----------------------------------------------------
+384                                     // RX_CRC: consume exactly 2 CRC bytes (not checked)
+385                                     // Local: forward CRC bytes unchanged on the local stream.
+386                                     // ----------------------------------------------------
+387                                     RX_CRC: begin
+388        1/1                              $display(&quot;%t .........................crc_left %0d  entered state moved to crc %0h&quot;,$time, crc_left, data_in);
+389        2/2                              if (crc_left &gt; 0) crc_left &lt;= crc_left - 1;
+                   <font color = "red">==>  MISSING_ELSE</font>
+390                     
+391                                         // Forward CRC bytes to local output only (if not dropped)
+392        1/1                              if (!rx_drop &amp;&amp; !rx_is_remote) begin
+393        1/1                                  $display(&quot;push crc byte %0h&quot;,data_in );
+394        1/1                                  local_q.push_back(data_in);
+395                                         end
+                        MISSING_ELSE
+396                     
+397                                         // End-of-fragment on the second CRC byte
+398        1/1                              if (crc_left == 1) begin
+399        1/1                                  if (!rx_drop &amp;&amp; rx_is_remote) begin
+400        1/1                                      $display(&quot;no drop and is remote&quot;);
+401                                                 // Commit remote fragment payload if active and SEQ matches
+402        1/1                                      if (!(remote_active &amp;&amp; (rx_seq &lt;= rx_frag))) begin
+403                                                     // Remote fragment without valid active context =&gt; drop packet
+404        <font color = "red">0/1     ==>                                  $display(&quot;inc_drop_cnt rx_seq %0d active_seq %0d&quot;, rx_seq, active_seq);</font>
+405        <font color = "red">0/1     ==>                                  inc_drop_cnt();</font>
+406                                                 end else begin
+407                                                     // rx_frag is guaranteed non-zero by cfg_invalid() for remote
+408                                                     //if (rx_frag &lt; 1 || rx_frag &gt; 31) begin
+409        1/1                                          if (rx_seq &lt; 1 || rx_seq &gt; rx_frag) begin
+410        <font color = "red">0/1     ==>                                      drop_remote_packet_counted();</font>
+411                                                     end else begin
+412        1/1                                              $display(&quot;payload ready ........&quot;);
+413                                                         //frag_seen[rx_frag] = 1;
+414                                                         //frag_payload[rx_frag].delete();
+415        1/1                                              frag_seen[rx_seq] = 1;
+416        1/1                                              frag_payload[rx_seq].delete();
+417                                                         //foreach (cur_frag_payload[i]) frag_payload[rx_frag].push_back(cur_frag_payload[i]);
+418                                                         
+419        1/1                                              foreach (cur_frag_payload[i]) begin
+420        1/1                                                  $display (&quot;push back to frag_payload %0h&quot;,cur_frag_payload[i] );
+421        1/1                                                  frag_payload[rx_seq].push_back(cur_frag_payload[i]);
+422                                                         end
+423                     
+424                                                         // Infer N as max FRAG_NUM seen so far
+425        1/1                                              $display(&quot;check if frag done&quot;);
+426        2/2                                              if (rx_frag &gt; active_max_frag) active_max_frag = rx_frag;
+                        MISSING_ELSE
+427        <font color = "red">1/2     ==>                                      if (rx_seq &gt; active_max_frag) active_max_frag = rx_seq;</font>
+                        MISSING_ELSE
+428                     
+429                                                         // If we now have all fragments 1..N, build output
+430        1/1                                              if (all_frags_ready(active_max_frag)) begin
+431        1/1                                                  build_and_queue_remote_output();
+432                                                         end
+                        MISSING_ELSE
+433                                                     end
+434                                                 end
+435                                             end
+                        MISSING_ELSE
+436                     
+437                                             // Ready for next fragment
+438        1/1                                  $display(&quot;ssssssssssssssssss state moved to idle&quot;);
+439        1/1                                  rx_st &lt;= RX_IDLE;
+440                                         end
+                        MISSING_ELSE
+441                                     end
+442                     
+443        <font color = "red">0/1     ==>                  default: rx_st &lt;= RX_IDLE;</font>
+444                     
+445                                 endcase
+446                             end
+                        MISSING_ELSE
+</pre>
+<hr>
+<a name="Cond"></a>
+Cond Coverage for Module : <a href="mod2.html" >bird</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="3" width="82">
+<tr><th></th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s8"><td class="lf">Conditions</td><td>41</td><td>33</td><td>80.49</td></tr>
+<tr class="s8"><td class="lf">Logical</td><td>41</td><td>33</td><td>80.49</td></tr>
+<tr class="wht"><td class="lf">Non-Logical</td><td>0</td><td>0</td><td></td></tr>
+<tr class="wht"><td class="lf">Event</td><td>0</td><td>0</td><td></td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       137
+ EXPRESSION (local_vld &amp;&amp; local_rdy)
+             ----1----    ----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       143
+ EXPRESSION (remote_vld &amp;&amp; remote_rdy)
+             -----1----    -----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       251
+ EXPRESSION (in_vld &amp;&amp; in_rdy)
+             ---1--    ---2--
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       269
+ EXPRESSION ((cfg[15:8] &gt; 8'b0) ? ((cfg[15:8] - 1)) : 0)
+             ---------1--------
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       278
+ EXPRESSION ((cfg[0] == 1'b1) &amp;&amp; remote_active &amp;&amp; (cfg[28:24] == active_seq))
+             --------1-------    ------2------    -------------3------------
+</pre>
+<table class="noborder">
+<col span="3" width="40">
+<tr><th>-1-</th><th>-2-</th><th>-3-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       355
+ EXPRESSION ((((!rx_is_remote)) &amp;&amp; remote_active) || (rx_is_remote &amp;&amp; ((!remote_active))))
+             ------------------1-----------------    ------------------2-----------------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       355
+ SUB-EXPRESSION (((!rx_is_remote)) &amp;&amp; remote_active)
+                 --------1--------    ------2------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       355
+ SUB-EXPRESSION (rx_is_remote &amp;&amp; ((!remote_active)))
+                 ------1-----    ---------2--------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       366
+ EXPRESSION (remote_active &amp;&amp; (rx_seq &lt;= rx_frag))
+             ------1------    ---------2---------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       392
+ EXPRESSION (((!rx_drop)) &amp;&amp; ((!rx_is_remote)))
+             ------1-----    --------2--------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       399
+ EXPRESSION (((!rx_drop)) &amp;&amp; rx_is_remote)
+             ------1-----    ------2-----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       402
+ EXPRESSION ( ! (remote_active &amp;&amp; (rx_seq &lt;= rx_frag)) )
+                -------------------1------------------
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uRed"><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       402
+ SUB-EXPRESSION (remote_active &amp;&amp; (rx_seq &lt;= rx_frag))
+                 ------1------    ---------2---------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       409
+ EXPRESSION ((rx_seq &lt; 1) || (rx_seq &gt; rx_frag))
+             ------1-----    ---------2--------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+</table>
+<hr>
+<a name="Toggle"></a>
+Toggle Coverage for Module : <a href="mod2.html" >bird</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s8">
+<td>Totals</td>
+<td class="rt">17</td>
+<td class="rt">14</td>
+<td class="rt">82.35 </td>
+</tr><tr class="s8">
+<td>Total Bits</td>
+<td class="rt">218</td>
+<td class="rt">193</td>
+<td class="rt">88.53 </td>
+</tr><tr class="s8">
+<td nowrap>Total Bits 0->1</td>
+<td class="rt">109</td>
+<td class="rt">97</td>
+<td class="rt">88.99 </td>
+</tr><tr class="s8">
+<td nowrap>Total Bits 1->0</td>
+<td class="rt">109</td>
+<td class="rt">96</td>
+<td class="rt">88.07 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s7">
+<td>Ports</td>
+<td class="rt">13</td>
+<td class="rt">10</td>
+<td class="rt">76.92 </td>
+</tr><tr class="s8">
+<td>Port Bits</td>
+<td class="rt">208</td>
+<td class="rt">183</td>
+<td class="rt">87.98 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 0->1</td>
+<td class="rt">104</td>
+<td class="rt">92</td>
+<td class="rt">88.46 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 1->0</td>
+<td class="rt">104</td>
+<td class="rt">91</td>
+<td class="rt">87.50 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s10">
+<td>Signals</td>
+<td class="rt">4</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>Signal Bits</td>
+<td class="rt">10</td>
+<td class="rt">10</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td nowrap>Signal Bits 0->1</td>
+<td class="rt">5</td>
+<td class="rt">5</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td nowrap>Signal Bits 1->0</td>
+<td class="rt">5</td>
+<td class="rt">5</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Port Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td><td class="alfsrt">Direction</td></tr><tr>
+<td>clk</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>rst_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>in_vld</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>in_rdy</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>data_in[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>cfg[29:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>cfg[30]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>cfg[31]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>drop_cnt[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>drop_cnt[5]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>drop_cnt[15:6]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>local_vld</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>local_rdy</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>data_local[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>remote_vld</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>remote_rdy</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>data_remote[31:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Signal Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td></tr><tr>
+<td>remote_active</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>rx_st[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>rx_is_remote</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>rx_drop</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr></table><br clear=all>
+<hr>
+<a name="FSM"></a>
+FSM Coverage for Module : <a href="mod2.html" >bird</a><br clear=all>
+<table align=left class="noborder">
+<caption><b>Summary for FSM :: rx_st</b></caption>
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th><th nowrap width=200></th></tr><tr class="wht">
+<td>States</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+<td>(Not included in score)</td>
+</tr><tr class="s10">
+<td>Transitions</td>
+<td class="rt">5</td>
+<td class="rt">5</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr><tr class="wht">
+<td>Sequences</td>
+<td class="rt">0</td>
+<td class="rt">0</td>
+<td></td>
+<td></td>
+</tr></table><br clear=all>
+<b>State, Transition and Sequence Details for FSM :: rx_st</b><hr>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">states</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>RX_CRC</td>
+<td class="rt">342</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_IDLE</td>
+<td class="rt">240</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_PAYLOAD</td>
+<td class="rt">345</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">transitions</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>RX_CRC->RX_IDLE</td>
+<td class="rt">240</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_IDLE->RX_CRC</td>
+<td class="rt">342</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_IDLE->RX_PAYLOAD</td>
+<td class="rt">345</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_PAYLOAD->RX_CRC</td>
+<td class="rt">378</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>RX_PAYLOAD->RX_IDLE</td>
+<td class="rt">240</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<hr>
+<a name="Branch"></a>
+Branch Coverage for Module : <a href="mod2.html" >bird</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Line No.</th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s8">
+<td>Branches</td>
+<td></td>
+<td class="rt">44</td>
+<td class="rt">37</td>
+<td class="rt">84.09 </td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">128</td>
+<td class="rt">5</td>
+<td class="rt">5</td>
+<td class="rt">100.00</td>
+</tr><tr class="s8">
+<td>IF</td>
+<td class="rt">238</td>
+<td class="rt">39</td>
+<td class="rt">32</td>
+<td class="rt">82.05 </td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+128            if (!rst_n) begin
+               <font color = "green">-1-</font>  
+129              local_vld  <= 1'b0;
+           <font color = "green">      ==></font>
+130              data_local <= 8'h00;
+131        
+132              remote_vld  <= 1'b0;
+133              data_remote <= 32'h0;
+134            end else begin
+135              local_vld  = (local_q.size() != 0);
+136              data_local = (local_q.size() != 0) ? local_q[0] : 8'h00;
+137              if (local_vld && local_rdy) begin
+                 <font color = "green">-2-</font>  
+138                void'(local_q.pop_front());
+           <font color = "green">        ==></font>
+139              end
+                 MISSING_ELSE
+           <font color = "green">      ==></font>
+140        
+141              remote_vld  <= (remote_wq.size() != 0);
+142              data_remote <= (remote_wq.size() != 0) ? remote_wq[0] : 32'h0;
+143              if (remote_vld && remote_rdy) begin
+                 <font color = "green">-3-</font>  
+144                void'(remote_wq.pop_front());
+           <font color = "green">        ==></font>
+145              end
+                 MISSING_ELSE
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+238                if (!rst_n) begin
+                   <font color = "green">-1-</font>  
+239                    $display("ssssssssssssssssss state moved to idle");
+           <font color = "green">            ==></font>
+240                    rx_st <= RX_IDLE;
+241        
+242                    local_q.delete();
+243                    remote_wq.delete();
+244                    cur_frag_payload.delete();
+245        
+246                    drop_cnt <= 16'd0;
+247        
+248                    clear_remote_state();
+249        
+250                end else begin
+251                if (in_vld && in_rdy) begin
+                   <font color = "green">-2-</font>  
+252                    unique case (rx_st)
+                              <font color = "red">-3-</font>  
+253        
+254                        // ----------------------------------------------------
+255                        // RX_IDLE: first payload byte of a fragment arrives here
+256                        // cfg sampled in SAME cycle as first payload byte.
+257                        // ----------------------------------------------------
+258                        RX_IDLE: begin
+259                            rx_drop      = cfg_invalid(cfg);
+260                            rx_is_remote = cfg[0];
+261                            rx_len       = cfg[15:8];
+262                            rx_frag      = cfg[20:16];
+263                            rx_seq       = cfg[28:24];
+264        
+265                            $display("==================== Delete cur_frag_payload =========== idle state now");
+266                            cur_frag_payload.delete();
+267        
+268                            // Consuming FIRST payload byte now; remaining payload bytes = PAYLOAD_LEN - 1
+269                            payload_left = (cfg[15:8] > 0) ? (cfg[15:8] - 1) : 0;
+                                                              <font color = "green">-4-</font>  
+                                                              <font color = "green">==></font>  
+                                                              <font color = "green">==></font>  
+270                            crc_left     = 2;
+271        
+272                            // If cfg invalid: count one dropped packet; consume bytes but do not forward/store
+273                            if (rx_drop) begin
+                               <font color = "green">-5-</font>  
+274                                inc_drop_cnt();
+275                                $display("rx_drop ..........................");
+276        
+277                                // If this is a remote fragment for the active packet, drop that active packet too
+278                                if (cfg[0] == 1'b1 && remote_active && (cfg[28:24] == active_seq)) begin
+                                   <font color = "green">-6-</font>  
+279                                    drop_remote_packet_counted();
+           <font color = "green">                            ==></font>
+280                                end  
+                                   MISSING_ELSE
+           <font color = "green">                        ==></font>
+281                            end else begin
+282                                // Valid cfg: handle local vs remote
+283                                if (!rx_is_remote) begin
+                                   <font color = "green">-7-</font>  
+284                                    // LOCAL valid (SEQ_NUM==1 and FRAG_NUM==1): forward first payload byte
+285                                    $display("push new local pkt first byte %0h",data_in );
+           <font color = "green">                            ==></font>
+286                                    local_q.push_back(data_in);
+287                                end else begin
+288                                    // REMOTE valid
+289                                    if (!remote_active) begin
+                                       <font color = "green">-8-</font>  
+290                                        // Start a new remote packet only when FRAG_NUM==1
+291                                        // if (rx_frag == 1) begi
+292                                      if (rx_seq <= rx_frag) begin
+                                         <font color = "green">-9-</font>  
+293                                            remote_active   = 1;
+           <font color = "green">                                    ==></font>
+294                                            active_seq      = rx_seq;
+295                                            active_max_frag = 0;
+296                                            for (int f = 1; f <= 31; f++) begin
+297                                                frag_seen[f] = 0;
+298                                                frag_payload[f].delete();
+299                                            end
+300                                            $display("====================0 Adding data %0h",data_in);
+301                                            cur_frag_payload.push_back(data_in);
+302                                        end else begin
+303                                            // Remote fragment without active packet start => drop packet
+304                                            inc_drop_cnt();
+           <font color = "green">                                    ==></font>
+305                                        end
+306                                    end else begin
+307                                        // Active packet exists
+308                                        $display("rx seq %0d, active seq %0d", rx_seq, active_seq);
+309                                        //if (rx_seq != active_seq) begin
+310                                        if (rx_seq > rx_frag) begin
+                                           <font color = "green">-10-</font>  
+311                                            // Mismatched SEQ while accumulating => drop current packet
+312                                            drop_remote_packet_counted();
+313        
+314                                            // Start new only if incoming fragment is FRAG_NUM==1
+315                                            //if (rx_frag == 1) begin
+316                                            if (rx_seq == 1) begin
+                                               <font color = "red">-11-</font>  
+317                                                remote_active   = 1;
+           <font color = "red">                                        ==></font>
+318                                                active_seq      = rx_seq;
+319                                                active_max_frag = 0;
+320                                                for (int f = 1; f <= 31; f++) begin
+321                                                    frag_seen[f] = 0;
+322                                                    frag_payload[f].delete();
+323                                                end
+324                                                $display("====================1 Adding data %0h",data_in);
+325                                                cur_frag_payload.push_back(data_in);
+326                                            end else begin
+327                                                // Otherwise drop incoming packet too
+328                                                inc_drop_cnt();
+           <font color = "green">                                        ==></font>
+329                                            end
+330                                        end else begin
+331                                            // Same SEQ as active: accept payload
+332                                            $display("====================2 Adding data %0h",data_in);
+           <font color = "green">                                    ==></font>
+333                                            cur_frag_payload.push_back(data_in);
+334                                        end
+335                                    end
+336                                end
+337                            end
+338        
+339                            // Next state
+340                            if (((cfg[15:8] > 0) ? (cfg[15:8] - 1) : 0) == 0) begin
+                               <font color = "green">-12-</font>  
+341                                $display("ssssssssssssssssss state moved to crc");
+           <font color = "green">                        ==></font>
+342                                rx_st <= RX_CRC;
+343                            end else begin
+344                                $display("ssssssssssssssssss state moved to payload");
+           <font color = "green">                        ==></font>
+345                                rx_st <= RX_PAYLOAD;
+346                            end
+347                        
+348                        end
+349        
+350                        // ----------------------------------------------------
+351                        // RX_PAYLOAD: remaining payload bytes
+352                        // ----------------------------------------------------
+353                        RX_PAYLOAD: begin
+354                            rx_drop      = cfg_invalid(cfg);
+355                          if ( (!rx_is_remote && remote_active) ||  (rx_is_remote && !remote_active) ) begin
+                             <font color = "green">-13-</font>  
+356                                 rx_drop =1;
+           <font color = "green">                         ==></font>
+357                            $display("Dropppppppppppppppppppppppppppp");
+358                          end
+                             MISSING_ELSE
+           <font color = "green">                  ==></font>
+359                            if (!rx_drop) begin
+                               <font color = "green">-14-</font>  
+360                                if (!rx_is_remote) begin
+                                   <font color = "green">-15-</font>  
+361                                    // Local: forward payload bytes
+362                                    $display("push payload byte %0h",data_in );
+           <font color = "green">                            ==></font>
+363                                    local_q.push_back(data_in);
+364                                end else begin
+365                                    // Remote: only keep collecting if active context matches rx_seq
+366                                    if (remote_active && (rx_seq <= rx_frag)) begin
+                                       <font color = "red">-16-</font>  
+367                                        $display("%t ====================3 Adding data %0h",$time,data_in);
+           <font color = "green">                                ==></font>
+368                                        cur_frag_payload.push_back(data_in);
+369                                    end
+                                       MISSING_ELSE
+           <font color = "red">                            ==></font>
+370                                end
+371                            end
+                               MISSING_ELSE
+           <font color = "green">                    ==></font>
+372        
+373                            if (payload_left > 0) payload_left <= payload_left - 1;
+                               <font color = "green">-17-</font>  
+           <font color = "green">                    ==></font>
+                               MISSING_ELSE
+           <font color = "green">                    ==></font>
+374        
+375                            // After consuming the last remaining payload byte, move to CRC
+376                            if (payload_left == 3) begin
+                               <font color = "green">-18-</font>  
+377                                //$display("ssssssssssssssssss state moved to crc");
+378                                rx_st <= RX_CRC;
+           <font color = "green">                        ==></font>
+379                            end
+                               MISSING_ELSE
+           <font color = "green">                    ==></font>
+380                            
+381                        end
+382        
+383                        // ----------------------------------------------------
+384                        // RX_CRC: consume exactly 2 CRC bytes (not checked)
+385                        // Local: forward CRC bytes unchanged on the local stream.
+386                        // ----------------------------------------------------
+387                        RX_CRC: begin
+388                            $display("%t .........................crc_left %0d  entered state moved to crc %0h",$time, crc_left, data_in);
+389                            if (crc_left > 0) crc_left <= crc_left - 1;
+                               <font color = "red">-19-</font>  
+           <font color = "green">                    ==></font>
+                               MISSING_ELSE
+           <font color = "red">                    ==></font>
+390        
+391                            // Forward CRC bytes to local output only (if not dropped)
+392                            if (!rx_drop && !rx_is_remote) begin
+                               <font color = "green">-20-</font>  
+393                                $display("push crc byte %0h",data_in );
+           <font color = "green">                        ==></font>
+394                                local_q.push_back(data_in);
+395                            end
+                               MISSING_ELSE
+           <font color = "green">                    ==></font>
+396        
+397                            // End-of-fragment on the second CRC byte
+398                            if (crc_left == 1) begin
+                               <font color = "green">-21-</font>  
+399                                if (!rx_drop && rx_is_remote) begin
+                                   <font color = "green">-22-</font>  
+400                                    $display("no drop and is remote");
+401                                    // Commit remote fragment payload if active and SEQ matches
+402                                    if (!(remote_active && (rx_seq <= rx_frag))) begin
+                                       <font color = "red">-23-</font>  
+403                                        // Remote fragment without valid active context => drop packet
+404                                        $display("inc_drop_cnt rx_seq %0d active_seq %0d", rx_seq, active_seq);
+           <font color = "red">                                ==></font>
+405                                        inc_drop_cnt();
+406                                    end else begin
+407                                        // rx_frag is guaranteed non-zero by cfg_invalid() for remote
+408                                        //if (rx_frag < 1 || rx_frag > 31) begin
+409                                        if (rx_seq < 1 || rx_seq > rx_frag) begin
+                                           <font color = "red">-24-</font>  
+410                                            drop_remote_packet_counted();
+           <font color = "red">                                    ==></font>
+411                                        end else begin
+412                                            $display("payload ready ........");
+413                                            //frag_seen[rx_frag] = 1;
+414                                            //frag_payload[rx_frag].delete();
+415                                            frag_seen[rx_seq] = 1;
+416                                            frag_payload[rx_seq].delete();
+417                                            //foreach (cur_frag_payload[i]) frag_payload[rx_frag].push_back(cur_frag_payload[i]);
+418                                            
+419                                            foreach (cur_frag_payload[i]) begin
+420                                                $display ("push back to frag_payload %0h",cur_frag_payload[i] );
+421                                                frag_payload[rx_seq].push_back(cur_frag_payload[i]);
+422                                            end
+423        
+424                                            // Infer N as max FRAG_NUM seen so far
+425                                            $display("check if frag done");
+426                                            if (rx_frag > active_max_frag) active_max_frag = rx_frag;
+                                               <font color = "green">-25-</font>  
+           <font color = "green">                                    ==></font>
+                                               MISSING_ELSE
+           <font color = "green">                                    ==></font>
+427                                            if (rx_seq > active_max_frag) active_max_frag = rx_seq;
+                                               <font color = "red">-26-</font>  
+           <font color = "red">                                    ==></font>
+                                               MISSING_ELSE
+           <font color = "green">                                    ==></font>
+428        
+429                                            // If we now have all fragments 1..N, build output
+430                                            if (all_frags_ready(active_max_frag)) begin
+                                               <font color = "green">-27-</font>  
+431                                                build_and_queue_remote_output();
+           <font color = "green">                                        ==></font>
+432                                            end
+                                               MISSING_ELSE
+           <font color = "green">                                    ==></font>
+433                                        end
+434                                    end
+435                                end
+                                   MISSING_ELSE
+           <font color = "green">                        ==></font>
+436        
+437                                // Ready for next fragment
+438                                $display("ssssssssssssssssss state moved to idle");
+439                                rx_st <= RX_IDLE;
+440                            end
+                               MISSING_ELSE
+           <font color = "green">                    ==></font>
+441                        end
+442        
+443                        default: rx_st <= RX_IDLE;
+           <font color = "red">                ==></font>
+444        
+445                    endcase
+446                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>-4-</th><th nowrap width=80>-5-</th><th nowrap width=80>-6-</th><th nowrap width=80>-7-</th><th nowrap width=80>-8-</th><th nowrap width=80>-9-</th><th nowrap width=80>-10-</th><th nowrap width=80>-11-</th><th nowrap width=80>-12-</th><th nowrap width=80>-13-</th><th nowrap width=80>-14-</th><th nowrap width=80>-15-</th><th nowrap width=80>-16-</th><th nowrap width=80>-17-</th><th nowrap width=80>-18-</th><th nowrap width=80>-19-</th><th nowrap width=80>-20-</th><th nowrap width=80>-21-</th><th nowrap width=80>-22-</th><th nowrap width=80>-23-</th><th nowrap width=80>-24-</th><th nowrap width=80>-25-</th><th nowrap width=80>-26-</th><th nowrap width=80>-27-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_IDLE </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_PAYLOAD </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>RX_CRC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>default</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center-inner-north">
+<div id="center-bread-crumb" class="breadCrumb module urg-margin-bottom">
+  <ul name="inst_tag_2">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+  <ul name="tag_bird">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="ui-layout-south">
+<table align=center><tr><td class="s0 cl">0%</td>
+<td class="s1 cl">10%</td>
+<td class="s2 cl">20%</td>
+<td class="s3 cl">30%</td>
+<td class="s4 cl">40%</td>
+<td class="s5 cl">50%</td>
+<td class="s6 cl">60%</td>
+<td class="s7 cl">70%</td>
+<td class="s8 cl">80%</td>
+<td class="s9 cl">90%</td>
+<td class="s10 cl">100%</td></tr></table></div>
+</body>
+</html>
