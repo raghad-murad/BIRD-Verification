@@ -1,6 +1,3 @@
-// ============================================================================
-// bird_scoreboard.sv - Reference model and checker
-// ============================================================================
 `ifndef BIRD_SCOREBOARD_SV
 `define BIRD_SCOREBOARD_SV
 
@@ -10,27 +7,23 @@
 `uvm_analysis_imp_decl(_remote)
 
 class bird_scoreboard extends uvm_scoreboard;
+
     `uvm_component_utils(bird_scoreboard)
 
     // Analysis imp ports
-    uvm_analysis_imp_input  #(bird_transaction,      bird_scoreboard) input_imp;
-    uvm_analysis_imp_local  #(bird_output_txn,  bird_scoreboard) local_imp;
-    uvm_analysis_imp_remote #(bird_output_txn,  bird_scoreboard) remote_imp;
+    uvm_analysis_imp_input  #(bird_transaction, bird_scoreboard) input_imp;
+    uvm_analysis_imp_local  #(bird_output_txn, bird_scoreboard) local_imp;
+    uvm_analysis_imp_remote #(bird_output_txn, bird_scoreboard) remote_imp;
 
     // Direct interface access for final drop_cnt snapshot
     virtual bird_if vif;
 
-    // -------------------------------------------------------------------------
     // Internal reference model state
-    // -------------------------------------------------------------------------
 
-    // Queue of expected local transactions
-    // Each entry = byte array (payload + CRC)
+    // Queue of expected local txns; each entry is a byte array (payload+CRC)
     byte unsigned expected_local[$][$];
 
-    // Remote fragment accumulation:
-    // DUT uses seq_num as fragment POSITION (1..N) and frag_num as TOTAL count.
-    // frag_payload_by_pos[pos] holds payload bytes for that position.
+    // Remote accumulation: seq_num=fragment position, frag_num=total count
     byte unsigned frag_payload_by_pos[int][];  // [position(seq_num)] -> bytes
     bit           frag_seen_pos[int];          // which positions received
     int           remote_max_frag;             // max(frag_num, seq_num) seen so far
@@ -47,69 +40,66 @@ class bird_scoreboard extends uvm_scoreboard;
     int unsigned  checks_passed;
     int unsigned  checks_failed;
 
-    // -------------------------------------------------------------------------
     function new(string name = get_type_name(), uvm_component parent = null);
         super.new(name, parent);
     endfunction
 
     function void build_phase(uvm_phase phase);
+
         super.build_phase(phase);
+
         input_imp  = new("input_imp",  this);
         local_imp  = new("local_imp",  this);
         remote_imp = new("remote_imp", this);
+
         if (!uvm_config_db #(virtual bird_if)::get(this, "", "vif_plain", vif))
             `uvm_fatal(get_type_name(), "Cannot get virtual interface")
+        
         expected_drop_cnt = 0;
         observed_drop_cnt = 0;
         checks_passed     = 0;
         checks_failed     = 0;
         remote_max_frag   = 0;
         remote_active     = 0;
+
     endfunction
 
-    // -------------------------------------------------------------------------
-    // run_phase - clear reference-model accumulation state on every reset.
-    // Without this, the model has no concept of rst_n at all: it would keep
-    // "remembering" pre-reset fragment/local state and could falsely expect
-    // a transaction that the (correctly-reset) DUT never produces, or
-    // falsely keep counting drops across a reset the DUT itself cleared.
-    // Spec Sec.9: buffers/state cleared and drop_cnt zeroed on reset.
-    // -------------------------------------------------------------------------
+    // Clear accumulated state on reset so the model doesn't keep expecting
+    // transactions the reset DUT never produces (spec Sec.9)
     task run_phase(uvm_phase phase);
+        
         forever begin
             @(negedge vif.rst_n);
-            `uvm_info(get_type_name(),
-                "Reset detected - clearing reference-model accumulation state (spec Sec.9)", UVM_LOW)
+            
+            `uvm_info(get_type_name(), "Reset detected - clearing reference-model accumulation state (spec Sec.9)", UVM_LOW)
+            
             expected_local.delete();
             expected_remote.delete();
             frag_payload_by_pos.delete();
             frag_seen_pos.delete();
+            
             remote_max_frag   = 0;
             remote_active     = 0;
             expected_drop_cnt = 0;
+
         end
+
     endtask
 
-    // -------------------------------------------------------------------------
-    // write_input - called by bird_in_monitor analysis port
-    // Builds expected outputs using the reference model
-    // -------------------------------------------------------------------------
+    // Called by bird_in_monitor; builds expected outputs from the reference model
     function void write_input(bird_transaction pkt);
+        
         bit drop = 0;
 
         `uvm_info(get_type_name(),
             $sformatf("Input: %s", pkt.convert2string()), UVM_HIGH)
 
-        // ---- Drop condition checks ----
-
-        // SEQ_NUM == 0
         if (pkt.seq_num == 0) begin
             `uvm_info(get_type_name(), "Drop: SEQ_NUM=0", UVM_MEDIUM)
             expected_drop_cnt++;
             drop = 1;
         end
 
-        // FRAG_NUM == 0
         if (!drop && pkt.frag_num == 0) begin
             `uvm_info(get_type_name(), "Drop: FRAG_NUM=0", UVM_MEDIUM)
             expected_drop_cnt++;
@@ -123,14 +113,13 @@ class bird_scoreboard extends uvm_scoreboard;
             drop = 1;
         end
 
-        // Reserved bits nonzero
         if (!drop && (pkt.rsvd_7_1 != 0 || pkt.rsvd_23_21 != 0 || pkt.rsvd_31_29 != 0)) begin
             `uvm_info(get_type_name(), "Drop: nonzero reserved bits", UVM_MEDIUM)
             expected_drop_cnt++;
             drop = 1;
         end
 
-        // Local traffic: SEQ_NUM must be 1 AND FRAG_NUM must be 1, else drop
+        // LOCAL traffic requires SEQ_NUM=1 and FRAG_NUM=1
         if (!drop && pkt.traffic_type == 0 && (pkt.seq_num != 1 || pkt.frag_num != 1)) begin
             `uvm_info(get_type_name(), "Drop: LOCAL packet with SEQ_NUM != 1 or FRAG_NUM != 1", UVM_MEDIUM)
             expected_drop_cnt++;
@@ -139,18 +128,18 @@ class bird_scoreboard extends uvm_scoreboard;
 
         if (drop) return;
 
-        // ---- Valid packet: route to local or remote model ----
+        // Route valid packet to local or remote model
         if (pkt.traffic_type == 0) begin
-            // LOCAL: forward payload + CRC directly
             model_local(pkt);
         end else begin
-            // REMOTE: accumulate fragments
             model_remote(pkt);
         end
+
     endfunction
 
     // Build expected local output
     function void model_local(bird_transaction pkt);
+        
         byte unsigned exp[];
         int idx;
 
@@ -165,16 +154,15 @@ class bird_scoreboard extends uvm_scoreboard;
             expected_local.push_back(q);
         end
 
-        `uvm_info(get_type_name(),
-            $sformatf("Model: enqueued local txn, %0d bytes", exp.size()), UVM_HIGH)
+        `uvm_info(get_type_name(), $sformatf("Model: enqueued local txn, %0d bytes", exp.size()), UVM_HIGH)
+    
     endfunction
 
-    // Accumulate remote fragments and assemble when complete.
-    // DUT uses seq_num as fragment POSITION and frag_num as TOTAL count.
-    // Drop condition: seq_num > frag_num (position exceeds total).
+    // Assemble remote fragments; seq_num=position, frag_num=total, drop if position>total
     function void model_remote(bird_transaction pkt);
-        int pos   = int'(pkt.seq_num);   // fragment position (1..N)
-        int total = int'(pkt.frag_num);  // total fragment count (N)
+        
+        int pos   = int'(pkt.seq_num);                             // fragment position (1..N)
+        int total = int'(pkt.frag_num);                            // total fragment count (N)
         byte unsigned merged[];
         logic [31:0] words[$];
         int total_bytes;
@@ -183,44 +171,47 @@ class bird_scoreboard extends uvm_scoreboard;
 
         // Drop if position > total (DUT condition: rx_seq > rx_frag)
         if (pos > total) begin
+            
             `uvm_info(get_type_name(),
                 $sformatf("Drop: seq_num(%0d) > frag_num(%0d)", pos, total), UVM_MEDIUM)
-            // DUT calls inc_drop_cnt() twice in the same always_ff block when
-            // remote_active (once for in-flight via drop_remote_packet_counted,
-            // once for the bad packet).  Both are NB assignments from the same
-            // old drop_cnt value, so the second overwrites the first — net
-            // effect is exactly ONE increment regardless of remote_active.
+            
+            // DUT's two same-cycle NB drop_cnt increments collapse to exactly one net increment
             expected_drop_cnt++;
+            
             if (remote_active) begin
                 frag_payload_by_pos.delete();
                 frag_seen_pos.delete();
                 remote_max_frag = 0;
                 remote_active   = 0;
             end
+
             return;
+
         end
 
-        // Start assembly if not active
         if (!remote_active) remote_active = 1;
 
         // Store fragment payload at its position
         frag_payload_by_pos[pos] = new[pkt.payload.size()](pkt.payload);
         frag_seen_pos[pos]       = 1;
 
-        // Update max seen: max(total, pos)
         if (total > remote_max_frag) remote_max_frag = total;
         if (pos   > remote_max_frag) remote_max_frag = pos;
 
         // Check completion: all positions 1..remote_max_frag received
         begin
+            
             bit complete = 1;
+            
             for (int f = 1; f <= remote_max_frag; f++) begin
                 if (!frag_seen_pos.exists(f)) begin complete = 0; break; end
             end
 
             if (complete && remote_max_frag >= 1) begin
+                
                 // Merge payloads in position order (1..N)
                 total_bytes = 0;
+                
                 for (int f = 1; f <= remote_max_frag; f++)
                     total_bytes += frag_payload_by_pos[f].size();
 
@@ -236,22 +227,26 @@ class bird_scoreboard extends uvm_scoreboard;
                 // Pack little-endian into 32-bit words, final word = {16'h0000, crc}
                 words.delete();
                 begin
+                    
                     int n         = merged.size();
                     int full_wrds = n / 4;
                     int rem       = n % 4;
+                    
                     for (int w = 0; w < full_wrds; w++) begin
                         logic [31:0] word;
-                        word = {merged[w*4+3], merged[w*4+2],
-                                merged[w*4+1], merged[w*4]};
+                        word = {merged[w*4+3], merged[w*4+2], merged[w*4+1], merged[w*4]};
                         words.push_back(word);
                     end
+                    
                     if (rem > 0) begin
                         logic [31:0] last_word = 32'h0;
                         for (int b = 0; b < rem; b++)
                             last_word[8*b +: 8] = merged[full_wrds*4 + b];
                         words.push_back(last_word);
                     end
+                    
                     words.push_back({16'h0000, new_crc});
+                
                 end
 
                 expected_remote.push_back(words);
@@ -265,14 +260,16 @@ class bird_scoreboard extends uvm_scoreboard;
                 frag_seen_pos.delete();
                 remote_max_frag = 0;
                 remote_active   = 0;
+            
             end
+        
         end
+    
     endfunction
 
-    // -------------------------------------------------------------------------
-    // write_local - called by out_monitor local analysis port
-    // -------------------------------------------------------------------------
+    // Called by out_monitor's local analysis port
     function void write_local(bird_output_txn txn);
+        
         byte unsigned exp_q[$];
         bit pass = 1;
 
@@ -288,14 +285,12 @@ class bird_scoreboard extends uvm_scoreboard;
 
         exp_q = expected_local.pop_front();
 
-        // Check byte count
         if (txn.local_data.size() != exp_q.size()) begin
             `uvm_error(get_type_name(),
                 $sformatf("Local size mismatch: got %0d bytes, expected %0d",
                     txn.local_data.size(), exp_q.size()))
             pass = 0;
         end else begin
-            // Check each byte
             foreach (exp_q[i]) begin
                 if (txn.local_data[i] !== exp_q[i]) begin
                     `uvm_error(get_type_name(),
@@ -306,7 +301,6 @@ class bird_scoreboard extends uvm_scoreboard;
             end
         end
 
-        // Check drop_cnt
         observed_drop_cnt = int'(txn.drop_cnt_val);
 
         if (pass) begin
@@ -317,9 +311,7 @@ class bird_scoreboard extends uvm_scoreboard;
         end
     endfunction
 
-    // -------------------------------------------------------------------------
-    // write_remote - called by out_monitor remote analysis port
-    // -------------------------------------------------------------------------
+    // Called by out_monitor's remote analysis port
     function void write_remote(bird_output_txn txn);
         logic [31:0] exp_words[$];
         bit pass = 1;
@@ -367,9 +359,6 @@ class bird_scoreboard extends uvm_scoreboard;
         end
     endfunction
 
-    // -------------------------------------------------------------------------
-    // check_phase - final drop_cnt check and summary
-    // -------------------------------------------------------------------------
     function void check_phase(uvm_phase phase);
         super.check_phase(phase);
 
@@ -415,4 +404,4 @@ class bird_scoreboard extends uvm_scoreboard;
 
 endclass : bird_scoreboard
 
-`endif // BIRD_SCOREBOARD_SV
+`endif
