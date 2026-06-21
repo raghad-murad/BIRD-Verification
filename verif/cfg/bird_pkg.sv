@@ -1,6 +1,7 @@
-// Package with all TB includes in dependency order
 `ifndef BIRD_PKG_SV
 `define BIRD_PKG_SV
+
+// Package with all testbench includes in dependency order
 
 package bird_pkg;
 
@@ -10,7 +11,7 @@ package bird_pkg;
     // Sequence item
     `include "verif/seq/bird_transaction.sv"
 
-    // Sequences
+    // Sequencer + base sequence (bird_base_seq.sv defines bird_sequencer class)
     `include "verif/seq/bird_base_seq.sv"
     `include "verif/seq/local_seq.sv"
     `include "verif/seq/remote_seq.sv"
@@ -21,7 +22,7 @@ package bird_pkg;
     `include "verif/seq/reset_seq.sv"
     `include "verif/seq/interleaved_seq.sv"
 
-    //  Environment
+    // Environment components
     `include "verif/env/bird_monitor.sv"
     `include "verif/env/bird_scoreboard.sv"
     `include "verif/env/bird_coverage.sv"
@@ -43,7 +44,10 @@ package bird_pkg;
     `include "verif/tests/interleaved_test.sv"
     `include "verif/tests/sampling_test.sv"
     `include "verif/tests/handshake_test.sv"
+    `include "verif/tests/seq_frag_test.sv"
+    `include "verif/tests/reorder_test.sv"
+    `include "verif/tests/cfg_test.sv"
 
 endpackage : bird_pkg
 
-`endif // BIRD_PKG_SV
+`endif 

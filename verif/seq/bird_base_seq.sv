@@ -1,6 +1,4 @@
-// Sequencer and base sequence
-
-// sequencer
+// Sequencer
 class bird_sequencer extends uvm_sequencer #(bird_transaction);
     `uvm_component_utils(bird_sequencer)
 
@@ -10,7 +8,7 @@ class bird_sequencer extends uvm_sequencer #(bird_transaction);
 
 endclass : bird_sequencer
 
-// Base sequence provides common randomisation helpers
+// Base sequence — common randomisation helpers
 class bird_base_seq extends uvm_sequence #(bird_transaction);
     `uvm_object_utils(bird_base_seq)
 
@@ -18,7 +16,7 @@ class bird_base_seq extends uvm_sequence #(bird_transaction);
         super.new(name);
     endfunction
 
-    // to send one transaction, checking randomisation
+    // Send one transaction, checking randomisation
     task send_pkt(bird_transaction pkt);
         start_item(pkt);
         if (!pkt.randomize())
@@ -26,7 +24,7 @@ class bird_base_seq extends uvm_sequence #(bird_transaction);
         finish_item(pkt);
     endtask
 
-    // to send a pre-configured transaction
+    // Send a pre-configured transaction
     task send_configured(bird_transaction pkt);
         start_item(pkt);
         finish_item(pkt);
