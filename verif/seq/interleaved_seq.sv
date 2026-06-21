@@ -1,6 +1,4 @@
-// TP_CLS_03: interleaved local or remote traffic
-// ensures correct routing with no cross-channel contamination
-
+// TP_CLS_03: local and remote routing must not cross-contaminate outputs (spec Sec.6-7)
 class interleaved_local_remote_seq extends bird_base_seq;
     `uvm_object_utils(interleaved_local_remote_seq)
     int unsigned num_pairs = 2;
@@ -12,7 +10,7 @@ class interleaved_local_remote_seq extends bird_base_seq;
     task body();
         bird_transaction pkt;
         repeat (num_pairs) begin
-            // send one local packet
+            // Complete local packet
             pkt = bird_transaction::type_id::create("local_pkt");
             start_item(pkt);
             if (!pkt.randomize() with {
@@ -24,7 +22,7 @@ class interleaved_local_remote_seq extends bird_base_seq;
                 `uvm_fatal(get_type_name(), "Randomisation failed")
             finish_item(pkt);
 
-             // send one remote packet
+            // Complete single-fragment remote packet
             pkt = bird_transaction::type_id::create("remote_pkt");
             start_item(pkt);
             if (!pkt.randomize() with {
@@ -36,7 +34,7 @@ class interleaved_local_remote_seq extends bird_base_seq;
                 `uvm_fatal(get_type_name(), "Randomisation failed")
             finish_item(pkt);
 
-             // allow DUT queues to settle before next pair
+            // Drain remote_vld before next packet (see payload_sweep_seq)
             #200;
         end
         `uvm_info(get_type_name(),
