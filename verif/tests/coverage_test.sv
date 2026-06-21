@@ -1,7 +1,6 @@
 `ifndef COVERAGE_TEST_SV
 `define COVERAGE_TEST_SV
-// coverage test that executes multiple sequences to improve
-// functional coverage across payload sizes and packet types.
+
 class coverage_test extends bird_base_test;
     `uvm_component_utils(coverage_test)
     function new(string name = "coverage_test", uvm_component parent = null);
@@ -22,4 +21,4 @@ class coverage_test extends bird_base_test;
     endtask
 endclass : coverage_test
 
-`endif // COVERAGE_TEST_SV
+`endif
