@@ -1,14 +1,11 @@
 `ifndef HANDSHAKE_TEST_SV
 `define HANDSHAKE_TEST_SV
 
-// Handshake protocol verification tests (TP_HS_01 , TP_HS_02,TP_HS_03,TP_HS_04, TP_HS_05).
-// tests use direct VIF access for cycle-accurate ready or valid control.
-// input backpressure cannot be exercised because in_rdy is hardwired high.
-// Output backpressure is verified through local_rdy and remote_rdy.
+// TP_HS_01..05 (spec Sec.3,6,7): drives vif directly for cycle-accurate backpressure; in_rdy is hardwired 1 so only output backpressure (TP_HS_03/04/05) is genuine
 
+// Shared helpers used by all 5 tests below
 
-
-// Generate a payload stream with CRC16 appended.
+// Builds a payload_len-byte stream: random data bytes + 2 CRC bytes
 function automatic void hs_build_stream(input int unsigned payload_len, output byte unsigned stream[]);
     byte unsigned payload[];
     bit  [15:0]   crc;
@@ -21,7 +18,7 @@ function automatic void hs_build_stream(input int unsigned payload_len, output b
     stream[payload.size()+1] = crc[7:0];
 endfunction
 
-// Build configuration word from packet fields.
+// Assembles a cfg word from its fields (mirrors bird_transaction::get_cfg())
 function automatic logic [31:0] hs_build_cfg(bit traffic_type, bit [4:0] seq_num,
                                               bit [4:0] frag_num, bit [7:0] payload_len);
     logic [31:0] c;
@@ -33,7 +30,7 @@ function automatic logic [31:0] hs_build_cfg(bit traffic_type, bit [4:0] seq_num
     return c;
 endfunction
 
-// Send one packet fragment through the interface.
+// Drives one fragment directly on vif; caller must have already waited for reset deassertion
 task automatic hs_drive_fragment(virtual bird_if vif, logic [31:0] cfg_val, byte unsigned stream[]);
     @(negedge vif.clk);
     vif.cfg <= cfg_val;
@@ -50,8 +47,7 @@ task automatic hs_drive_fragment(virtual bird_if vif, logic [31:0] cfg_val, byte
     @(negedge vif.clk);
 endtask
 
-// TP_HS_01: Verify successful transfer when valid and ready are asserted.
-
+// TP_HS_01: Transfer Rule (spec Sec.3.1) — in_rdy hardwired 1, so only confirms the protocol holds end-to-end
 class transfer_rule_test extends bird_base_test;
     `uvm_component_utils(transfer_rule_test)
 
@@ -95,8 +91,7 @@ class transfer_rule_test extends bird_base_test;
     endtask
 endclass : transfer_rule_test
 
-// TP_HS_02: verify input-side handshake behavior and confirm
-// that in_rdy remains asserted throughout the transfer.
+// TP_HS_02: Input Stability Rule (spec Sec.3.2) — in_rdy hardwired 1, so polls it to confirm vld=1/rdy=0 never occurs
 class stability_rule_test extends bird_base_test;
     `uvm_component_utils(stability_rule_test)
 
@@ -156,9 +151,7 @@ class stability_rule_test extends bird_base_test;
     endtask
 endclass : stability_rule_test
 
-
-// TP_HS_03 :verify local output backpressure.
-// data must remain stable while local_rdy is low.
+// TP_HS_03: Local Output Backpressure (spec Sec.3) — holds local_rdy=0 for 5 cycles mid-packet, checks data_local stability and full byte-correct reception
 class local_backpressure_test extends bird_base_test;
     `uvm_component_utils(local_backpressure_test)
 
@@ -242,10 +235,7 @@ class local_backpressure_test extends bird_base_test;
     endtask
 endclass : local_backpressure_test
 
-
-// TP_HS_04: verify remote output backpressure and data integrity
-// after packet reassembly.
-
+// TP_HS_04: Remote Output Backpressure (spec Sec.3/7.3) — holds remote_rdy=0 for 5 cycles mid-reassembly, checks data_remote stability and merged word content
 class remote_backpressure_test extends bird_base_test;
     `uvm_component_utils(remote_backpressure_test)
 
@@ -275,8 +265,7 @@ class remote_backpressure_test extends bird_base_test;
         cfg1 = hs_build_cfg(1'b1, 5'd1, 5'd2, 8'(payload_len));  // position 1 of 2
         cfg2 = hs_build_cfg(1'b1, 5'd2, 5'd2, 8'(payload_len));  // position 2 of 2
 
-        // Expected merged payload = fragment1 data ++ fragment2 data
-        // (data bytes only, excluding each fragment's own 2 CRC bytes)
+        // Expected merged payload = fragment1 data ++ fragment2 data (excluding each fragment's 2 CRC bytes)
         merged = new[2 * (payload_len - 2)];
         foreach (stream1[i]) if (i < payload_len - 2) merged[i] = stream1[i];
         foreach (stream2[i]) if (i < payload_len - 2) merged[(payload_len - 2) + i] = stream2[i];
@@ -356,10 +345,7 @@ class remote_backpressure_test extends bird_base_test;
     endtask
 endclass : remote_backpressure_test
 
-
-// TP_HS_05 : apply backpressure on the last byte of a packet and
-// verify packet boundary integrity.
-
+// TP_HS_05: Backpressure on Last Byte (spec Sec.3.2) — holds local_rdy=0 on packet 1's final byte, checks stability and no cross-contamination into packet 2
 class backpressure_last_byte_test extends bird_base_test;
     `uvm_component_utils(backpressure_last_byte_test)
 
@@ -462,7 +448,6 @@ class backpressure_last_byte_test extends bird_base_test;
 
         phase.drop_objection(this);
     endtask
-
 endclass : backpressure_last_byte_test
 
-`endif // HANDSHAKE_TEST_SV
+`endif
