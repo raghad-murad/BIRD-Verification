@@ -1,4 +1,3 @@
-// Sequencer
 class bird_sequencer extends uvm_sequencer #(bird_transaction);
     `uvm_component_utils(bird_sequencer)
 
