@@ -1,10 +1,4 @@
-// ============================================================
-// remote_seq.sv — remote traffic sequences
-// ============================================================
-
-// ------------------------------------------------------------
-// remote_inorder_seq — remote packet, fragments in order
-// ------------------------------------------------------------
+// Remote packet, fragments sent in order
 class remote_inorder_seq extends bird_base_seq;
     `uvm_object_utils(remote_inorder_seq)
     int unsigned num_frags = 4;
@@ -15,8 +9,7 @@ class remote_inorder_seq extends bird_base_seq;
 
     task body();
         bird_transaction pkt;
-        // DUT protocol: seq_num = fragment position (1..N), frag_num = total count (N)
-        // All fragments share the same frag_num (total), seq_num identifies position
+        // seq_num=fragment position(1..N), frag_num=total count(N)
         for (int f = 1; f <= num_frags; f++) begin
             pkt = bird_transaction::type_id::create($sformatf("pkt_f%0d", f));
             start_item(pkt);
@@ -34,9 +27,7 @@ class remote_inorder_seq extends bird_base_seq;
     endtask
 endclass : remote_inorder_seq
 
-// ------------------------------------------------------------
-// remote_outoforder_seq — remote packet, fragments out of order
-// ------------------------------------------------------------
+// Remote packet, fragments sent out of order
 class remote_outoforder_seq extends bird_base_seq;
     `uvm_object_utils(remote_outoforder_seq)
     int unsigned num_frags = 4;
@@ -49,8 +40,7 @@ class remote_outoforder_seq extends bird_base_seq;
         bird_transaction pkt;
         int order[];
 
-        // DUT protocol: seq_num = position (1..N), frag_num = total (N)
-        // Build shuffled order of ALL positions 1..num_frags
+        // seq_num=position(1..N), frag_num=total(N); build shuffled order of all positions
         order = new[num_frags];
         foreach (order[i]) order[i] = i + 1;  // 1, 2, ..., num_frags
         // Fisher-Yates shuffle
@@ -80,9 +70,41 @@ class remote_outoforder_seq extends bird_base_seq;
     endtask
 endclass : remote_outoforder_seq
 
-// ------------------------------------------------------------
-// remote_single_frag_seq — remote with exactly 1 fragment
-// ------------------------------------------------------------
+// TP_MIX_03 support: two complete remote packets back-to-back with no gap between them
+class remote_back_to_back_seq extends bird_base_seq;
+    `uvm_object_utils(remote_back_to_back_seq)
+    int unsigned num_frags = 3;
+
+    function new(string name = "remote_back_to_back_seq");
+        super.new(name);
+    endfunction
+
+    task send_one_packet(int unsigned tag);
+        bird_transaction pkt;
+        for (int f = 1; f <= num_frags; f++) begin
+            pkt = bird_transaction::type_id::create($sformatf("pkt%0d_f%0d", tag, f));
+            start_item(pkt);
+            if (!pkt.randomize() with {
+                traffic_type == 1;
+                seq_num      == f;
+                frag_num     == num_frags;
+                payload_len  inside {[4:32]};
+            })
+                `uvm_fatal(get_type_name(), "Randomisation failed")
+            finish_item(pkt);
+        end
+    endtask
+
+    task body();
+        send_one_packet(1);
+        send_one_packet(2);
+        `uvm_info(get_type_name(),
+            $sformatf("Sent 2 complete remote packets back-to-back (%0d frags each, no gap)", num_frags),
+            UVM_LOW)
+    endtask
+endclass : remote_back_to_back_seq
+
+// Remote packet with exactly 1 fragment
 class remote_single_frag_seq extends bird_base_seq;
     `uvm_object_utils(remote_single_frag_seq)
 
@@ -105,9 +127,7 @@ class remote_single_frag_seq extends bird_base_seq;
     endtask
 endclass : remote_single_frag_seq
 
-// ------------------------------------------------------------
-// backpressure_seq — sends packets while consumer holds rdy=0
-// ------------------------------------------------------------
+// Sends packets while consumer holds rdy=0
 class backpressure_seq extends bird_base_seq;
     `uvm_object_utils(backpressure_seq)
     int unsigned num_pkts = 4;
@@ -130,9 +150,7 @@ class backpressure_seq extends bird_base_seq;
     endtask
 endclass : backpressure_seq
 
-// ------------------------------------------------------------
-// rand_test_seq — fully randomised mix
-// ------------------------------------------------------------
+// Fully randomised packet mix
 class rand_test_seq extends bird_base_seq;
     `uvm_object_utils(rand_test_seq)
     int unsigned num_pkts = 32;
