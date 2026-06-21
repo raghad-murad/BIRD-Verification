@@ -1,9 +1,6 @@
-// coverage_seq.sv — directed coverage closure sequences
-// targets payload-length bins and high-fragment scenarios
+// Directed sequences to close functional coverage gaps
 
-// payload_sweep_seq
-// Covers payload length bins: small, typical, large, max
-
+// Sweeps local+remote packets across all payload_len coverage bins
 class payload_sweep_seq extends bird_base_seq;
     `uvm_object_utils(payload_sweep_seq)
 
@@ -16,7 +13,6 @@ class payload_sweep_seq extends bird_base_seq;
         int unsigned lens[4] = '{14, 100, 200, 255};
 
         foreach (lens[i]) begin
-         // Local packet
             pkt = bird_transaction::type_id::create($sformatf("loc_pkt%0d", i));
             start_item(pkt);
             if (!pkt.randomize() with {
@@ -27,7 +23,7 @@ class payload_sweep_seq extends bird_base_seq;
             })
                 `uvm_fatal(get_type_name(), "Randomisation failed")
             finish_item(pkt);
-   // Remote packet
+
             pkt = bird_transaction::type_id::create($sformatf("rem_pkt%0d", i));
             start_item(pkt);
             if (!pkt.randomize() with {
@@ -38,9 +34,7 @@ class payload_sweep_seq extends bird_base_seq;
             })
                 `uvm_fatal(get_type_name(), "Randomisation failed")
             finish_item(pkt);
-
-            // allow remote monitor to separate transactions
-
+            // Drain remote_vld to 0 so the monitor can segment the next remote packet
             #1000;
         end
         `uvm_info(get_type_name(),
@@ -48,9 +42,7 @@ class payload_sweep_seq extends bird_base_seq;
     endtask
 endclass : payload_sweep_seq
 
-// remote_maxfrag_seq
-// Remote packet stress test with maximum fragment count
-
+// Remote packet with 31 in-order fragments (frag_6_31/seq_25_31/cx_type_frag bins)
 class remote_maxfrag_seq extends remote_inorder_seq;
     `uvm_object_utils(remote_maxfrag_seq)
 
