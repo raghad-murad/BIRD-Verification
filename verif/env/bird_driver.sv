@@ -1,13 +1,7 @@
-// ============================================================
-// bird_driver — drives bird_transaction items onto the DUT interface
-//
-// Protocol:
-//   - Assert cfg stable for the entire fragment transfer
-//   - Drive in_vld=1, data_in=byte, wait until in_rdy=1
-//   - Stream payload bytes then CRC MSB, CRC LSB
-//   - Handle backpressure: hold signals stable when in_rdy=0
-// ============================================================
+// Drives transactions onto DUT interface
+
 class bird_driver extends uvm_driver #(bird_transaction);
+
     `uvm_component_utils(bird_driver)
 
     virtual bird_if.driver_mp vif;
@@ -17,50 +11,53 @@ class bird_driver extends uvm_driver #(bird_transaction);
     endfunction
 
     function void build_phase(uvm_phase phase);
+
         super.build_phase(phase);
-        if (!uvm_config_db #(virtual bird_if.driver_mp)::get(
-                this, "", "driver_mp", vif))
+
+        if (!uvm_config_db #(virtual bird_if.driver_mp)::get(this, "", "driver_mp", vif))
             `uvm_fatal(get_type_name(), "Cannot get virtual interface")
+
     endfunction
 
     task run_phase(uvm_phase phase);
+
         bird_transaction pkt;
-        // Idle state
+
+        // Drive idle values
         vif.driver_cb.in_vld    <= 1'b0;
         vif.driver_cb.data_in   <= 8'h00;
         vif.driver_cb.cfg       <= 32'h00000000;
         vif.driver_cb.local_rdy <= 1'b1;
         vif.driver_cb.remote_rdy<= 1'b1;
 
-        // Wait for reset deassertion
+        // Wait for reset release
         @(posedge vif.clk iff vif.rst_n === 1'b1);
+
         @(vif.driver_cb);
 
         forever begin
+
             seq_item_port.get_next_item(pkt);
             `uvm_info(get_type_name(), {"Driving: ", pkt.convert2string()}, UVM_MEDIUM)
             drive_packet(pkt);
             seq_item_port.item_done();
 
-            // If a mid-run reset interrupted the fragment above, the bus was
-            // already forced idle inside drive_packet. Resync to the reset
-            // deassertion before accepting the next item, mirroring the
-            // power-on wait above, so the driver never tries to drive while
-            // the DUT is in reset.
+            // Resync after reset interruption
             if (vif.rst_n !== 1'b1) begin
-                `uvm_info(get_type_name(),
-                    "Reset detected mid-stream - waiting for deassertion before next item", UVM_LOW)
+
+                `uvm_info(get_type_name(), "Reset detected mid-stream - waiting for deassertion before next item", UVM_LOW)
+
                 @(posedge vif.clk iff vif.rst_n === 1'b1);
+
                 @(vif.driver_cb);
+
             end
         end
     endtask
 
-    // Drive one complete fragment (payload + CRC).
-    // Runs a parallel reset watcher: if rst_n drops mid-transfer, the byte
-    // stream is aborted immediately and the bus is forced idle, instead of
-    // blindly continuing to push stale bytes across the reset boundary.
+    // Drive one fragment and abort on reset
     task drive_packet(bird_transaction pkt);
+
         logic [31:0] cfg_val;
         byte unsigned stream[];
         int stream_len;
@@ -80,34 +77,43 @@ class bird_driver extends uvm_driver #(bird_transaction);
         @(vif.driver_cb);
 
         fork : drive_stream
+
             begin
+
                 foreach (stream[i]) begin
+
                     // Drive byte with in_vld=1
                     vif.driver_cb.in_vld  <= 1'b1;
                     vif.driver_cb.data_in <= stream[i];
+
                     @(vif.driver_cb);
+
                     // Wait until DUT accepts (in_rdy=1)
                     while (vif.driver_cb.in_rdy !== 1'b1) begin
                         @(vif.driver_cb);
+
                     end
+
                 end
             end
             begin
+
                 @(negedge vif.rst_n);
-                `uvm_info(get_type_name(),
-                    "rst_n asserted mid-transfer - aborting current drive_packet", UVM_LOW)
+
+                `uvm_info(get_type_name(), "rst_n asserted mid-transfer - aborting current drive_packet", UVM_LOW)
             end
         join_any
         disable drive_stream;
 
-        // De-assert valid (normal completion or reset-aborted - either way
-        // the bus must return to idle)
+        // Return bus to idle
         vif.driver_cb.in_vld  <= 1'b0;
         vif.driver_cb.data_in <= 8'h00;
+
         @(vif.driver_cb);
+
     endtask
 
-    // Allow test to control local_rdy / remote_rdy
+    // Allow test to control local_rdy and remote_rdy
     task set_local_rdy(logic val);
         vif.driver_cb.local_rdy <= val;
     endtask
