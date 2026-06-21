@@ -1,10 +1,4 @@
-// ============================================================
-// local_seq.sv — local traffic sequences
-// ============================================================
-
-// ------------------------------------------------------------
-// local_basic_seq — one valid local packet
-// ------------------------------------------------------------
+// One valid local packet
 class local_basic_seq extends bird_base_seq;
     `uvm_object_utils(local_basic_seq)
 
@@ -26,9 +20,7 @@ class local_basic_seq extends bird_base_seq;
     endtask
 endclass : local_basic_seq
 
-// ------------------------------------------------------------
-// local_multi_seq — multiple local packets back-to-back
-// ------------------------------------------------------------
+// Multiple local packets back-to-back
 class local_multi_seq extends bird_base_seq;
     `uvm_object_utils(local_multi_seq)
     int unsigned num_pkts = 8;
