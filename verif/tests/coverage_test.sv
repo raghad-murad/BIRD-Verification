@@ -19,6 +19,7 @@ class coverage_test extends bird_base_test;
         #80000;
         phase.drop_objection(this);
     endtask
+    
 endclass : coverage_test
 
 `endif
