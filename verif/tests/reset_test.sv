@@ -1,21 +1,9 @@
 `ifndef RESET_TEST_SV
 `define RESET_TEST_SV
 
-// ============================================================
-// reset_test.sv — TP_RST_01..TP_RST_04
-// Each test makes its own explicit pass/fail determination
-// against the exact wording of its TP's Expected Result column
-// and against spec Section 9 (Reset Behavior). None of these
-// rely solely on the scoreboard/checker catching a violation
-// implicitly.
-// ============================================================
+// TP_RST_01..04: each test verdicts explicitly against its TP's Expected Result and spec Sec.9 (Reset Behavior), not just via scoreboard/checker
 
-// ------------------------------------------------------------
-// TP_RST_01 — Power-On Reset
-// Spec Section 9: while rst_n=0, all valid outputs deasserted
-// and drop_cnt=0. Polls throughout the initial reset window
-// (same poll-on-posedge pattern bird_checker already uses).
-// ------------------------------------------------------------
+// TP_RST_01: Power-On Reset (spec Sec.9) — polls that outputs stay deasserted and drop_cnt=0 throughout the initial reset window
 class power_on_reset_test extends bird_base_test;
     `uvm_component_utils(power_on_reset_test)
 
@@ -27,11 +15,7 @@ class power_on_reset_test extends bird_base_test;
         bit fail = 0;
         phase.raise_objection(this);
 
-        // Let the design's own async-reset response settle for at least one
-        // clock edge before sampling anything - otherwise outputs simply
-        // haven't been driven yet (read as X), which is not a spec
-        // violation, just simulation startup. Mirrors bird_checker's
-        // existing run_phase pattern.
+        // Let the design's reset response settle one clock edge before sampling, else outputs read X (sim startup, not a violation)
         @(posedge vif.clk);
         while (vif.rst_n !== 1'b1) begin
             if (vif.local_vld !== 1'b0) begin
@@ -61,29 +45,7 @@ class power_on_reset_test extends bird_base_test;
     endtask
 endclass : power_on_reset_test
 
-// ------------------------------------------------------------
-// TP_RST_02 — Reset During Local Packet
-// Spec Section 9: any packet in progress is discarded on
-// reset, and local_vld must deassert. Drives a long local
-// packet, interrupts it mid-payload with rst_n, then confirms
-// no local output ever appeared for that packet.
-//
-// CONFIRMED DUT BUG (do not fix here, do not work around):
-// design/bird.sv's output-driving always_ff block (the one
-// commented "Drive outputs + pop on handshake") assigns
-// local_vld/data_local with BLOCKING (=) assignment in its
-// normal-operation branch, but with NON-BLOCKING (<=)
-// assignment in its reset branch, on the same signal in the
-// same edge-sensitive block. When posedge clk and negedge rst_n
-// coincide, the blocking assignment in the normal-operation
-// path can execute after the non-blocking reset write is
-// scheduled, overriding it and leaving local_vld=1 - so bytes
-// already queued in local_q before reset leak out instead of
-// being discarded. Spec Section 9 requires local_vld=0 while
-// rst_n=0. This test is intentionally left FAILING to surface
-// that defect; see bird_checker's independent "RESET VIOLATION:
-// local_vld is not deasserted during rst_n=0" for corroboration.
-// ------------------------------------------------------------
+// TP_RST_02: Reset During Local Packet — DUT BUG: mixed blocking/non-blocking assignment in the output always_ff lets queued local_vld leak through reset on a coincident posedge clk/negedge rst_n; intentionally left failing to surface it
 class reset_during_local_test extends bird_base_test;
     `uvm_component_utils(reset_during_local_test)
 
@@ -132,14 +94,7 @@ class reset_during_local_test extends bird_base_test;
     endtask
 endclass : reset_during_local_test
 
-// ------------------------------------------------------------
-// TP_RST_03 — Reset During Remote Reassembly
-// Spec Section 9: buffers/fragment state cleared, no remote
-// output, drop_cnt=0. Also probes that fragment state was
-// actually cleared (not silently reused) by sending only the
-// withheld 3rd fragment afterward and confirming it alone
-// cannot complete a (stale) merge.
-// ------------------------------------------------------------
+// TP_RST_03: Reset During Remote Reassembly — confirms buffers/state clear and probes that a lone post-reset fragment can't complete a stale merge
 class reset_during_remote_test extends bird_base_test;
     `uvm_component_utils(reset_during_remote_test)
 
@@ -184,10 +139,7 @@ class reset_during_remote_test extends bird_base_test;
             `uvm_error(get_type_name(),
                 $sformatf("TP_RST_03 FAIL: drop_cnt=%0d after reset (expected 0, spec Sec.9)", vif.drop_cnt));
 
-        // Stale-state probe: send only the withheld fragment 3 of 3. If
-        // fragment state was genuinely cleared, this lone fragment cannot
-        // complete a merge (positions 1,2 are missing) and remote_vld must
-        // never assert for it.
+        // Stale-state probe: a lone fragment 3 can't complete a merge unless pre-reset state was wrongly retained
         fork
             begin
                 forever begin
@@ -212,14 +164,7 @@ class reset_during_remote_test extends bird_base_test;
     endtask
 endclass : reset_during_remote_test
 
-// ------------------------------------------------------------
-// TP_RST_04 — Normal Operation After Reset
-// Reuses local_basic_seq (same stimulus as local_basic_test)
-// but gives it its own traceable name/verdict mapped 1:1 to
-// this TP, with an explicit confirmation that local output was
-// actually observed (in addition to the scoreboard's automatic
-// byte-for-byte check, which remains connected and active).
-// ------------------------------------------------------------
+// TP_RST_04: Normal Operation After Reset — reuses local_basic_seq with an explicit local-output observation on top of the scoreboard's check
 class normal_after_reset_test extends bird_base_test;
     `uvm_component_utils(normal_after_reset_test)
 
@@ -256,4 +201,63 @@ class normal_after_reset_test extends bird_base_test;
     endtask
 endclass : normal_after_reset_test
 
-`endif // RESET_TEST_SV
+// TP_CNT_06: Reset Clears Counter (spec Sec.9) — DUT BUG: drop_cnt's reset-clear isn't visible until a couple cycles into the reset-hold window, so this samples drop_cnt at the first post-rst_n=0 edge to catch it
+class reset_clears_drop_cnt_test extends bird_base_test;
+    `uvm_component_utils(reset_clears_drop_cnt_test)
+
+    function new(string name = "reset_clears_drop_cnt_test", uvm_component parent = null);
+        super.new(name, parent);
+    endfunction
+
+    task run_phase(uvm_phase phase);
+        drop_cnt_wraparound_seq seq = drop_cnt_wraparound_seq::type_id::create("seq");
+        logic [15:0] drop_cnt_before_reset;
+        logic [15:0] drop_cnt_immediately_after;
+        logic [15:0] drop_cnt_after_full_hold;
+        phase.raise_objection(this);
+
+        @(posedge vif.clk iff vif.rst_n === 1'b1);
+
+        // Reuse the wraparound sequence's guaranteed-drop stimulus with a small count
+        seq.num_pkts = 5;
+        seq.start(env.agent.sequencer);
+        #100;
+
+        drop_cnt_before_reset = vif.drop_cnt;
+        if (drop_cnt_before_reset == 16'h0000)
+            `uvm_error(get_type_name(),
+                "TP_CNT_06 FAIL: drop_cnt is still 0x0000 before reset - drops were not registered, so this test cannot prove reset clears a non-zero counter");
+
+        `uvm_info(get_type_name(),
+            $sformatf("Asserting rst_n with drop_cnt=0x%04h (TP_CNT_06)", drop_cnt_before_reset), UVM_LOW)
+
+        // Capture drop_cnt at the first clock edge while rst_n is already 0, per the literal "immediately" wording
+        fork
+            begin
+                @(negedge vif.rst_n);
+                @(posedge vif.clk);
+                drop_cnt_immediately_after = vif.drop_cnt;
+            end
+            vif.apply_reset(4);
+        join
+
+        if (drop_cnt_immediately_after == 16'h0000)
+            `uvm_info(get_type_name(),
+                $sformatf("TP_CNT_06 PASS: drop_cnt cleared to 0x0000 immediately after reset (was 0x%04h before)",
+                    drop_cnt_before_reset), UVM_LOW)
+        else
+            `uvm_error(get_type_name(),
+                $sformatf("TP_CNT_06 FAIL: drop_cnt=0x%04h at the first clock edge after rst_n=0 (expected 0x0000 IMMEDIATELY per spec Sec.9), before reset was 0x%04h. DUT BUG: drop_cnt does not clear synchronously with reset assertion (see bird_checker's independent RESET VIOLATION reports).",
+                    drop_cnt_immediately_after, drop_cnt_before_reset));
+
+        // Informational only: confirm it settles to 0 by the time reset deasserts
+        drop_cnt_after_full_hold = vif.drop_cnt;
+        `uvm_info(get_type_name(),
+            $sformatf("drop_cnt=0x%04h once reset deasserts (informational)", drop_cnt_after_full_hold), UVM_LOW)
+
+        #50;
+        phase.drop_objection(this);
+    endtask
+endclass : reset_clears_drop_cnt_test
+
+`endif
