@@ -1,11 +1,10 @@
-// ============================================================================
-// bird_env.sv - UVM Environment
-// Contains: agent, out_monitor, scoreboard, coverage
-// ============================================================================
 `ifndef BIRD_ENV_SV
 `define BIRD_ENV_SV
 
+// Top-level verification environment
+
 class bird_env extends uvm_env;
+
     `uvm_component_utils(bird_env)
 
     // Environment components
@@ -27,24 +26,21 @@ class bird_env extends uvm_env;
         scoreboard  = bird_scoreboard::type_id::create("scoreboard",  this);
         coverage    = bird_coverage::type_id::create("coverage",      this);
         checker     = bird_checker::type_id::create("checker",        this);
+
     endfunction
 
     function void connect_phase(uvm_phase phase);
+
         super.connect_phase(phase);
 
-        // Connect input monitor → scoreboard input imp
         agent.ap.connect(scoreboard.input_imp);
-
-        // Connect input monitor → coverage subscriber
         agent.ap.connect(coverage.analysis_export);
 
-        // Connect output monitor local port → scoreboard local imp
         out_monitor.local_ap.connect(scoreboard.local_imp);
-
-        // Connect output monitor remote port → scoreboard remote imp
         out_monitor.remote_ap.connect(scoreboard.remote_imp);
+
     endfunction
 
 endclass : bird_env
 
-`endif // BIRD_ENV_SV
+`endif
