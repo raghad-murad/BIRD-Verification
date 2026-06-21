@@ -6,11 +6,7 @@ class bird_base_test extends uvm_test;
 
     bird_env env;
 
-    // Plain interface handle, shared with the scoreboard's vif_plain
-    // registration in tb_top.sv. Gives any test direct access to rst_n and
-    // all DUT outputs - used by reset-related tests (TP_RST_*, and reusable
-    // by future tests such as TP_CNT_06) to drive/observe reset directly,
-    // without needing a dedicated sequence/driver round-trip for it.
+    // Direct rst_n/output access for reset tests (TP_RST_*), shared with scoreboard's vif_plain
     virtual bird_if vif;
 
     function new(string name = "bird_base_test", uvm_component parent = null);
@@ -30,12 +26,7 @@ class bird_base_test extends uvm_test;
         phase.drop_objection(this);
     endtask
 
-    // Shared, unambiguous pass/fail banner inherited by every test (reset
-    // tests and otherwise). Based on UVM's own UVM_ERROR/UVM_FATAL severity
-    // counts, so any `uvm_error raised anywhere during the test (by a
-    // test's own explicit checks, the scoreboard, or the checker) is
-    // reflected here - mirrors the existing bird_scoreboard "*** TEST
-    // PASSED/FAILED ***" convention, generalised to the whole test.
+    // Pass/fail banner for every test, based on UVM_ERROR/UVM_FATAL severity counts
     function void report_phase(uvm_phase phase);
         uvm_report_server svr = uvm_report_server::get_server();
         int unsigned errors;
